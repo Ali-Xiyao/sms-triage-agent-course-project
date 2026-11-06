@@ -1,0 +1,23 @@
+# Data profile: results/test_predictions.csv
+
+**Shape:** 1028 rows × 6 cols
+
+## Columns
+
+| Column | Type | n | missing | summary |
+|---|---|---|---|---|
+| `id` | text | 1028 | 0 |  |
+| `y` | boolean | 1028 | 0 | 2 levels: 0(904), 1(124); min_group_n=124 |
+| `p` | continuous | 1028 | 0 | mean=0.142, sd=0.289, range=[0.00056, 0.998], skew=2.37 (highly skewed); outliers=157 (IQR); -> log axis |
+| `prediction` | boolean | 1028 | 0 | 2 levels: 0(912), 1(116); min_group_n=116 |
+| `action` | categorical | 1028 | 0 | 3 levels: likely_ham(908), likely_spam(116), review(4); min_group_n=4 |
+| `redacted_text` | text | 1028 | 0 |  |
+
+## Warnings
+- 列 'action' 至少有一个类别 n<10 — 小样本必须展示原始数据点，不要只画均值柱状图。
+
+## Chart suggestions (preliminary)
+- 分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）
+- p 跨数个量级（0.00056 ~ 0.998）→ 用对数 y 轴
+
+> 这是基于数据形态的**初步建议**。最终图型选择必须结合**论证目标**（你想说什么）—— 详见 `references/chart_selection.md`。

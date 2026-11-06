@@ -1,0 +1,16 @@
+
+--- figures/model_comparison.png ---
+  category: raster  ext: png  size: 69297 B
+  pixels: 1860x930  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/agent_evaluation.png ---
+  category: raster  ext: png  size: 74467 B
+  pixels: 1860x870  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/data_distribution.png ---
+  category: raster  ext: png  size: 66677 B
+  pixels: 1860x750  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+

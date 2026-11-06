@@ -1,0 +1,17 @@
+id,y,p,prediction,action,redacted_text
+05abd7f122fad86e,0,0.5263121797082042,1,likely_spam,"Please protect yourself from e-threats. SIB never asks for sensitive information like Passwords,ATM/SMS PIN thru email. Never share your password with anybody."
+e06df3c1d01a5548,1,0.11222562104335078,0,likely_ham,TBS/PERSOLVO. been chasing us since Sept for£38 definitely not paying now thanks to your information. We will ignore them. Kath. Manchester.
+ca0c0629bc73c782,1,0.26911340903145725,0,likely_ham,You can donate £2.50 to UNICEF's Asian Tsunami disaster support fund by texting DONATE to 864233. £2.50 will be added to your next bill
+95b93a98618bedd0,0,0.532919959066251,1,likely_spam,"Sir, i am waiting for your call, once free please call me."
+5e29388a80c87fb9,1,0.1581727117446869,0,likely_ham,"In The Simpsons Movie released in July 2007 name the band that died at the start of the film? A-Green Day, B-Blue Day, C-Red Day. (Send A, B or C)"
+ac8493fdd6351fcc,0,0.8410922475524787,1,likely_spam,"We have sent JD for Customer Service cum Accounts Executive to ur mail id, For details contact us"
+f881a16735d5fbc8,0,0.8386571266686816,1,likely_spam,Glad to see your reply.
+89bdad5470a413c7,1,0.25660198087030556,0,likely_ham,"Latest News! Police station toilet stolen, cops have nothing to go on!"
+0fe1f378384cbf0f,1,0.37968803709491483,0,likely_ham,2/2 146tf150p
+8acfc731a7e417b2,1,0.00635472549808012,0,likely_ham,"Do you ever notice that when you're driving, anyone going slower than you is an idiot and everyone driving faster than you is a maniac?"
+af35eb44735d0667,1,0.12216797336560505,0,likely_ham,Money i have won wining number 946 wot do i do next
+510c1895a4221a54,1,0.36512103404546525,0,likely_ham,"Goal! Arsenal 4 (Henry, 7 v Liverpool 2 Henry scores with a simple shot from 6 yards from a pass by Bergkamp to give Arsenal a 2 goal margin after 78 mins."
+a142496917511fea,1,0.2972263644537434,0,likely_ham,"0A$NETWORKS allow companies to bill for SMS, so they are responsible for their ""suppliers"", just as a shop has to give a guarantee on what they sell. B. G."
+790f1ee246c58fa6,1,0.24323902087659674,0,likely_ham,FROM 88066 LOST £12 HELP
+05dc2565cb87d1c4,1,0.1942193738602379,0,likely_ham,dating:i have had two of these. Only started after i sent a text to talk sport radio last week. Any connection do you think or coincidence?
+9ed1b2584530cc7c,1,0.1537254045083306,0,likely_ham,For sale - arsenal dartboard. Good condition but no doubles or trebles!

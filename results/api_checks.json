@@ -1,0 +1,22 @@
+[
+  {
+    "input": "Hello see you at class",
+    "action": "likely_ham"
+  },
+  {
+    "input": "您的快递异常",
+    "action": "review"
+  },
+  {
+    "input": "",
+    "action": "invalid"
+  },
+  {
+    "input": null,
+    "action": "invalid"
+  },
+  {
+    "input": "Hi meet me at https://bit.ly/example",
+    "action": "review"
+  }
+]

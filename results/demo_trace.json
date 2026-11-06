@@ -1,0 +1,171 @@
+[
+  {
+    "input": "Congratulations! You won a FREE prize. Claim your cash now at https://bit.ly/example",
+    "output": {
+      "action": "review",
+      "label": "链接需人工核验",
+      "score": 0.953052,
+      "trace": [
+        {
+          "state": "validate",
+          "detail": "输入合法；不写入短信正文"
+        },
+        {
+          "state": "classify",
+          "detail": "模型=char_lr；spam分数=0.9531，分数不等于诈骗概率"
+        },
+        {
+          "state": "link_tool",
+          "detail": "静态提取1个域名；未联网"
+        },
+        {
+          "state": "policy",
+          "detail": "低阈值0.49；高阈值0.50；决策=review"
+        },
+        {
+          "state": "recommend",
+          "detail": "仅提供分流建议；不删除、不回复、不访问链接；敏感操作由用户另行确认"
+        }
+      ],
+      "links": [
+        {
+          "host": "bit.ly",
+          "flags": [
+            "短链接目的地不透明"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "feature": "free",
+          "contribution": 0.1432
+        },
+        {
+          "feature": " free",
+          "contribution": 0.1402
+        },
+        {
+          "feature": "ize",
+          "contribution": 0.1399
+        },
+        {
+          "feature": "fre",
+          "contribution": 0.1227
+        },
+        {
+          "feature": "ree",
+          "contribution": 0.1227
+        }
+      ]
+    }
+  },
+  {
+    "input": "Hi, I will meet you at the library after class.",
+    "output": {
+      "action": "likely_ham",
+      "label": "倾向正常",
+      "score": 0.010291,
+      "trace": [
+        {
+          "state": "validate",
+          "detail": "输入合法；不写入短信正文"
+        },
+        {
+          "state": "classify",
+          "detail": "模型=char_lr；spam分数=0.0103，分数不等于诈骗概率"
+        },
+        {
+          "state": "link_tool",
+          "detail": "静态提取0个域名；未联网"
+        },
+        {
+          "state": "policy",
+          "detail": "低阈值0.49；高阈值0.50；决策=likely_ham"
+        },
+        {
+          "state": "recommend",
+          "detail": "仅提供分流建议；不删除、不回复、不访问链接；敏感操作由用户另行确认"
+        }
+      ],
+      "links": [],
+      "evidence": [
+        {
+          "feature": " i ",
+          "contribution": -0.212
+        },
+        {
+          "feature": " cl",
+          "contribution": 0.1035
+        },
+        {
+          "feature": "cla",
+          "contribution": 0.089
+        },
+        {
+          "feature": " cla",
+          "contribution": 0.0857
+        },
+        {
+          "feature": " hi",
+          "contribution": -0.0853
+        }
+      ]
+    }
+  },
+  {
+    "input": "您的快递异常，请点击链接。",
+    "output": {
+      "action": "review",
+      "label": "需人工复核",
+      "score": null,
+      "trace": [
+        {
+          "state": "validate",
+          "detail": "输入合法；不写入短信正文"
+        },
+        {
+          "state": "out_of_scope",
+          "detail": "模型仅支持以英文为主的短信"
+        }
+      ],
+      "links": [],
+      "evidence": []
+    }
+  },
+  {
+    "input": "",
+    "output": {
+      "action": "invalid",
+      "label": "输入无效",
+      "score": null,
+      "trace": [
+        {
+          "state": "validate",
+          "detail": "输入须为1至5000字符的非空文本"
+        }
+      ],
+      "links": [],
+      "evidence": []
+    }
+  },
+  {
+    "input": "zxqv jkzx qvzx",
+    "output": {
+      "action": "review",
+      "label": "需人工复核",
+      "score": null,
+      "trace": [
+        {
+          "state": "validate",
+          "detail": "输入合法；不写入短信正文"
+        },
+        {
+          "state": "out_of_vocabulary",
+          "detail": "无已知特征"
+        }
+      ],
+      "links": [],
+      "evidence": []
+    }
+  }
+]

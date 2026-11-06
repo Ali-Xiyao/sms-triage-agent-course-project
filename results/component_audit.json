@@ -1,0 +1,14 @@
+{
+  "TfidfVectorizer": {
+    "module": "sklearn.feature_extraction.text",
+    "source_basename": "text.py",
+    "source_sha256": "876f0d334735f77174822fabff287fab5602ccff8973a5430ebc70548916da62",
+    "line": 1735
+  },
+  "Pipeline": {
+    "module": "sklearn.pipeline",
+    "source_basename": "pipeline.py",
+    "source_sha256": "06f7ccb74a31ab9d3c900d87c814b7ce81b8acbd938ad74fe9cc674075f07869",
+    "line": 123
+  }
+}

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.DS_Store
+*.log
+# Local report builder and submission instructions contain student identifiers.
+docs/build_report.py
+提交说明.md
+*.docx
+*.pdf
