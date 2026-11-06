@@ -4,8 +4,12 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from PIL import Image
+from matplotlib import font_manager
+available={f.name for f in font_manager.fontManager.ttflist}
+font=next((f for f in ['SimHei','Noto Sans CJK SC','Source Han Sans SC','PingFang SC','Arial Unicode MS','Songti SC'] if f in available),None)
+if font is None: raise RuntimeError('绘图需要中文字体：请安装 Noto Sans CJK SC 后重新运行；Agent推理不依赖此字体。')
 from core import ROOT
-plt.rcParams.update({'font.family':'SimHei','axes.unicode_minus':False,'font.size':10,'svg.fonttype':'none'})
+plt.rcParams.update({'font.family':font,'axes.unicode_minus':False,'font.size':10,'svg.fonttype':'none'})
 m=json.loads((ROOT/'results/metrics.json').read_text());out=ROOT/'figures';out.mkdir(exist_ok=True)
 # Numeric model metrics compare categories: separated dots, no connecting lines.
 def save(fig,name):

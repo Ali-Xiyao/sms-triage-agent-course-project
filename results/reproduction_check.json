@@ -1,0 +1,11 @@
+{
+  "public_repository": "https://github.com/Ali-Xiyao/sms-triage-agent-course-project",
+  "source_commit": "3b2719a9bbcb764797e9e1982c530e4be12c8cf8",
+  "independent_source_export": "git archive HEAD",
+  "all_deterministic_metrics_match": true,
+  "excluded_from_comparison": [
+    "agent_ms_per_item",
+    "train_seconds"
+  ],
+  "unit_test_result": "OK"
+}

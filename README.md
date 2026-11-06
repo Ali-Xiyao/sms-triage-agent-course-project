@@ -26,6 +26,8 @@ python -m unittest discover -s tests -v
 python src/plot_results.py
 ```
 
+绘制中文图表需安装中文字体（优先SimHei或Noto Sans CJK SC）；Linux可安装fonts-noto-cjk。脚本会检测字体并给出提示，Agent推理和测试不依赖中文字体。
+
 ## 项目结构
 
 - `src/core.py`：状态工作流、解释、输入边界、链接工具、人工复核策略。
