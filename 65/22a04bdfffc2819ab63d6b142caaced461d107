@@ -1,0 +1,23 @@
+README.md
+  s_3a54662688f7da::t_c951858bf5764f 29-30
+results/reproduction_check.json
+  s_3a54662688f7da::t_49cf96528ec71f 1-11
+src/plot_results.py
+  s_3a54662688f7da::t_5e777399418a45 7-10,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6522a04bdfffc2819ab63d6b142caaced461d107",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
