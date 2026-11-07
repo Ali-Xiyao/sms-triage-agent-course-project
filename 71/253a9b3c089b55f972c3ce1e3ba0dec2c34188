@@ -1,0 +1,73 @@
+results/llm/contract_evaluation.json
+  s_3a54662688f7da::t_5758488bf4937a 1-4,6-19,21-156,158-338,340-520,522-617,619-717
+  s_3a54662688f7da::t_96eeb2c334d149 5,20,157,339,521,618
+docs/LLM_AGENT.md
+  s_3a54662688f7da::t_b7c52150feb24d 1-65
+docs/THIRD_PARTY.md
+  s_3a54662688f7da::t_b7c52150feb24d 3,31-34
+.gitignore
+  s_3a54662688f7da::t_18d38ef6426715 10-13
+docs/评分标准对照.md
+  s_3a54662688f7da::t_b7c52150feb24d 7-8
+src/app.py
+  s_3a54662688f7da::t_5758488bf4937a 20
+  s_3a54662688f7da::t_ca26a56b2ecbbd 6
+  s_3a54662688f7da::t_9a8a8b3c01a4c0 1-5,7-19,21-26,28-33,35-41,43-45,47-72
+knowledge/policies.json
+  s_3a54662688f7da::t_18d38ef6426715 1-10
+results/report_word_count.json
+  s_3a54662688f7da::t_b253b5e54ae4b9 2
+docs/SKILL.md
+  s_3a54662688f7da::t_9a8a8b3c01a4c0 1,3,5,7-32
+results/llm/browser_chinese.json
+  s_3a54662688f7da::t_953b69aae6e5b0 1-85
+.env.example
+  s_3a54662688f7da::t_18d38ef6426715 1-7
+src/llm_agent.py
+  s_3a54662688f7da::t_5758488bf4937a 141
+  s_3a54662688f7da::t_3197e3d2a81954 1-140,142-278
+docs/答辩提纲.md
+  s_3a54662688f7da::t_b7c52150feb24d 3,5-10,12,14-24,26
+docs/detail_sections.py
+  s_3a54662688f7da::t_9c96fa29cfadcf 18,122
+  s_3a54662688f7da::t_8c4f1f70771498 11
+config/live_eval_cases.json
+  s_3a54662688f7da::t_5758488bf4937a 1-5
+tests/test_llm_agent.py
+  s_3a54662688f7da::t_edbc7d9fdaf877 1-164
+src/evaluate_llm_contract.py
+  s_3a54662688f7da::t_5758488bf4937a 1-36
+results/llm/test_results.txt
+  s_3a54662688f7da::t_5758488bf4937a 1-47,49-50
+  s_3a54662688f7da::t_45c71c0aa27224 48
+docs/llm_sections.py
+  s_3a54662688f7da::t_9c96fa29cfadcf 1-49
+README.md
+  s_3a54662688f7da::t_b7c52150feb24d 1,3,5,7,16-18,21,24,26-32,34,36,38-45,47,49-54,56,58-63,65,67-72,74,76,78,80,82,85-87,90-108,110
+src/evaluate_llm_live.py
+  s_3a54662688f7da::t_5758488bf4937a 1-22
+docs/report_pages.json
+  s_3a54662688f7da::t_47e5ca8ee3f074 1-17
+results/llm/browser_normal.json
+  s_3a54662688f7da::t_ecd3639350c61a 1-125
+results/llm/browser_completed.json
+  s_3a54662688f7da::t_f355b21c7b22f4 1-177
+results/llm/browser_pending.json
+  s_3a54662688f7da::t_e43c2fbcc96781 1-170
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "71253a9b3c089b55f972c3ce1e3ba0dec2c34188",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
