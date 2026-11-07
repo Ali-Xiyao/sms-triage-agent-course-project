@@ -45,6 +45,6 @@ test_redirects_not_followed (test_llm_agent.TransportTests.test_redirects_not_fo
 test_wire_format_roundtrip (test_llm_agent.TransportTests.test_wire_format_roundtrip) ... ok
 
 ----------------------------------------------------------------------
-Ran 45 tests in 1.717s
+Ran 45 tests in 1.751s
 
 OK

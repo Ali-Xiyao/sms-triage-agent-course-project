@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-07T19:54:52.151493</dc:date>
+    <dc:date>2026-11-07T21:02:38.796178</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -26,7 +26,7 @@ L 446.4 216
 L 446.4 0
 L 0 0
 z
-" style="fill: #ffffff"/>
+" style="fill: #faf9f5"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
@@ -35,7 +35,7 @@ L 443.39976 184.695073
 L 443.39976 18.609615
 L 38.414302 18.609615
 z
-" style="fill: #ffffff"/>
+" style="fill: #faf9f5"/>
    </g>
    <g id="PathCollection_1">
     <path d="M 52.466578 186.349122
@@ -43,232 +43,222 @@ L 64.068836 186.349122
 L 64.068836 174.746864
 L 52.466578 174.746864
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 95.996872 172.380291
 L 103.242295 172.380291
 L 103.242295 165.134868
 L 95.996872 165.134868
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 143.854152 141.538979
 L 149.811663 141.538979
 L 149.811663 135.581468
 L 143.854152 135.581468
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 179.865331 148.418723
 L 185.522185 148.418723
 L 185.522185 142.761868
 L 179.865331 142.761868
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 207.588373 183.190147
 L 212.487353 183.190147
 L 212.487353 178.291167
 L 207.588373 178.291167
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 258.225924 104.298095
 L 263.517427 104.298095
 L 263.517427 99.006592
 L 258.225924 99.006592
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 304.071611 25.293406
 L 309.530362 25.293406
 L 309.530362 19.834655
 L 304.071611 19.834655
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 330.7397 25.15865
 L 335.92894 25.15865
 L 335.92894 19.969411
 L 330.7397 19.969411
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 377.403145 60.542819
 L 383.059999 60.542819
 L 383.059999 54.885965
 L 377.403145 54.885965
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
     <path d="M 420.457433 26.397483
 L 428.124339 26.397483
 L 428.124339 18.730578
 L 420.457433 18.730578
 z
-" clip-path="url(#p569e30d045)" style="fill: #111111; stroke: #111111"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: #c96442; stroke: #c96442"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m234e2afc7f" d="M 0 0
+       <path id="me639406c56" d="M 0 0
 L 0 3.5
-" style="stroke: #000000; stroke-width: 0.8"/>
+" style="stroke: #3d3934; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m234e2afc7f" x="48.056813" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="48.056813" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="48.056813" y="198.53101" transform="rotate(-0 48.056813 198.53101)">0.0</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="48.056813" y="198.53101" transform="rotate(-0 48.056813 198.53101)">0.0</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m234e2afc7f" x="125.196901" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="125.196901" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="125.196901" y="198.53101" transform="rotate(-0 125.196901 198.53101)">0.2</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="125.196901" y="198.53101" transform="rotate(-0 125.196901 198.53101)">0.2</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m234e2afc7f" x="202.336988" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="202.336988" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="202.336988" y="198.53101" transform="rotate(-0 202.336988 198.53101)">0.4</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="202.336988" y="198.53101" transform="rotate(-0 202.336988 198.53101)">0.4</text>
      </g>
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m234e2afc7f" x="279.477075" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="279.477075" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="279.477075" y="198.53101" transform="rotate(-0 279.477075 198.53101)">0.6</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="279.477075" y="198.53101" transform="rotate(-0 279.477075 198.53101)">0.6</text>
      </g>
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m234e2afc7f" x="356.617162" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="356.617162" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="356.617162" y="198.53101" transform="rotate(-0 356.617162 198.53101)">0.8</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="356.617162" y="198.53101" transform="rotate(-0 356.617162 198.53101)">0.8</text>
      </g>
     </g>
     <g id="xtick_6">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m234e2afc7f" x="433.757249" y="184.695073" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me639406c56" x="433.757249" y="184.695073" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="433.757249" y="198.53101" transform="rotate(-0 433.757249 198.53101)">1.0</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="433.757249" y="198.53101" transform="rotate(-0 433.757249 198.53101)">1.0</text>
      </g>
     </g>
     <g id="text_7">
-     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="240.907031" y="211.710698" transform="rotate(-0 240.907031 211.710698)">分箱平均模型分数</text>
+     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="240.907031" y="211.710698" transform="rotate(-0 240.907031 211.710698)">分箱平均模型分数</text>
     </g>
    </g>
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_7">
       <defs>
-       <path id="m1506a48a0d" d="M 0 0
+       <path id="ma9c3f465a7" d="M 0 0
 L -3.5 0
-" style="stroke: #000000; stroke-width: 0.8"/>
+" style="stroke: #3d3934; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="180.740657" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="180.740657" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_8">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="184.158626" transform="rotate(-0 31.414302 184.158626)">0.0</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="184.158626" transform="rotate(-0 31.414302 184.158626)">0.0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="149.105332" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="149.105332" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_9">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="152.5233" transform="rotate(-0 31.414302 152.5233)">0.2</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="152.5233" transform="rotate(-0 31.414302 152.5233)">0.2</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_9">
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="117.470006" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="117.470006" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_10">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="120.887975" transform="rotate(-0 31.414302 120.887975)">0.4</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="120.887975" transform="rotate(-0 31.414302 120.887975)">0.4</text>
      </g>
     </g>
     <g id="ytick_4">
      <g id="line2d_10">
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="85.834681" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="85.834681" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_11">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="89.25265" transform="rotate(-0 31.414302 89.25265)">0.6</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="89.25265" transform="rotate(-0 31.414302 89.25265)">0.6</text>
      </g>
     </g>
     <g id="ytick_5">
      <g id="line2d_11">
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="54.199356" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="54.199356" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_12">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="57.617325" transform="rotate(-0 31.414302 57.617325)">0.8</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="57.617325" transform="rotate(-0 31.414302 57.617325)">0.8</text>
      </g>
     </g>
     <g id="ytick_6">
      <g id="line2d_12">
       <g>
-       <use xlink:href="#m1506a48a0d" x="38.414302" y="22.564031" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#ma9c3f465a7" x="38.414302" y="22.564031" style="fill: #3d3934; stroke: #3d3934; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_13">
-      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end" x="31.414302" y="25.981999" transform="rotate(-0 31.414302 25.981999)">1.0</text>
+      <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: end; fill: #3d3934" x="31.414302" y="25.981999" transform="rotate(-0 31.414302 25.981999)">1.0</text>
      </g>
     </g>
     <g id="text_14">
-     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle" x="11.12524" y="101.652344" transform="rotate(-90 11.12524 101.652344)">该箱实际 spam 比例</text>
+     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="11.12524" y="101.652344" transform="rotate(-90 11.12524 101.652344)">该箱实际 spam 比例</text>
     </g>
    </g>
    <g id="line2d_13">
     <path d="M 48.056813 180.740657
 L 433.757249 22.564031
-" clip-path="url(#p569e30d045)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #808080; stroke-width: 1.5"/>
+" clip-path="url(#pe9c1dadaa2)" style="fill: none; stroke-dasharray: 6.29,2.72; stroke-dashoffset: 0; stroke: #a59b8b; stroke-width: 1.7"/>
    </g>
    <g id="patch_3">
     <path d="M 38.414302 184.695073
 L 38.414302 18.609615
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #b5ada1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
-    <path d="M 443.39976 184.695073
-L 443.39976 18.609615
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_5">
     <path d="M 38.414302 184.695073
 L 443.39976 184.695073
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_6">
-    <path d="M 38.414302 18.609615
-L 443.39976 18.609615
-" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #b5ada1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_15">
-    <text style="font-size: 12px; font-family: 'SimHei'; text-anchor: middle" x="240.907031" y="12.609615" transform="rotate(-0 240.907031 12.609615)">固定模型分数的校准诊断 点大小表示样本量</text>
+    <text style="font-size: 12px; font-family: 'SimHei'; text-anchor: middle; fill: #3d3934" x="240.907031" y="12.609615" transform="rotate(-0 240.907031 12.609615)">固定模型分数的校准诊断 点大小表示样本量</text>
    </g>
    <g id="legend_1">
-    <g id="patch_7">
+    <g id="patch_5">
      <path d="M 45.414302 40.90649
 L 147.414302 40.90649
 Q 149.414302 40.90649 149.414302 38.90649
@@ -279,22 +269,22 @@ Q 43.414302 23.609615 43.414302 25.609615
 L 43.414302 38.90649
 Q 43.414302 40.90649 45.414302 40.90649
 z
-" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+" style="fill: #faf9f5; opacity: 0.95; stroke: #ddd6ca; stroke-linejoin: miter"/>
     </g>
     <g id="line2d_14">
      <path d="M 47.414302 32.117427
 L 57.414302 32.117427
 L 67.414302 32.117427
-" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #808080; stroke-width: 1.5"/>
+" style="fill: none; stroke-dasharray: 6.29,2.72; stroke-dashoffset: 0; stroke: #a59b8b; stroke-width: 1.7"/>
     </g>
     <g id="text_16">
-     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: start" x="75.414302" y="35.617427" transform="rotate(-0 75.414302 35.617427)">分数与频率相等</text>
+     <text style="font-size: 10px; font-family: 'SimHei'; text-anchor: start; fill: #3d3934" x="75.414302" y="35.617427" transform="rotate(-0 75.414302 35.617427)">分数与频率相等</text>
     </g>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p569e30d045">
+  <clipPath id="pe9c1dadaa2">
    <rect x="38.414302" y="18.609615" width="404.985457" height="166.085458"/>
   </clipPath>
  </defs>

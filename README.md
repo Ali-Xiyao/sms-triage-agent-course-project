@@ -87,7 +87,7 @@ python src/plot_results.py
 python src/extended_experiments.py  # 55次CV拟合、15次学习曲线拟合等补充分析
 ```
 
-图表依赖中文字体；Linux可安装fonts-noto-cjk。补充实验结果保存在`results/extended/`，图在`figures/extended/`；均为冻结主结果后的探索性分析。
+图表采用暖白底、陶土橙、橄榄绿与沙色，公共样式在`src/figure_style.py`；点形与线型也用于区分数据。图表依赖中文字体；Linux可安装fonts-noto-cjk。补充实验结果保存在`results/extended/`，图在`figures/extended/`；均为冻结主结果后的探索性分析。
 
 ## 文档导航
 

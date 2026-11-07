@@ -2,7 +2,7 @@
   "kind": "scripted_protocol_and_software_tests",
   "live_llm_calls": 0,
   "real_provider_quality": "not_evaluated_no_api_key",
-  "created_utc": "2026-11-07T12:05:36.518023+00:00",
+  "created_utc": "2026-11-07T13:07:32.604070+00:00",
   "unit_tests": {
     "run": 45,
     "failures": 0,
@@ -17,7 +17,7 @@
       "expected": "likely_ham",
       "passed": true,
       "run": {
-        "id": "0eadde0c6a334aa9b5c3d1fba4f946c2",
+        "id": "21f0edc7d3e144168fe7fcf0525f43d6",
         "mode": "demo",
         "status": "completed",
         "action": "likely_ham",
@@ -154,7 +154,7 @@
       "expected": "review",
       "passed": true,
       "run": {
-        "id": "3afa528c58e6498e9fe1229960950087",
+        "id": "f1dcd356ab3340989b2063a79d7eae22",
         "mode": "demo",
         "status": "completed",
         "action": "review",
@@ -336,7 +336,7 @@
       "expected": "review",
       "passed": true,
       "run": {
-        "id": "05a8003db8564e708013b478de986213",
+        "id": "4de1f3a2b4894f609aad29e456886624",
         "mode": "demo",
         "status": "completed",
         "action": "review",
@@ -518,7 +518,7 @@
       "expected": "review",
       "passed": true,
       "run": {
-        "id": "ef89e94ded514656aa32b38ee0f498f6",
+        "id": "1ad3587aba8d41cc81951e230a8601fd",
         "mode": "demo",
         "status": "completed",
         "action": "review",
@@ -615,7 +615,7 @@
       "expected": "review",
       "passed": true,
       "run": {
-        "id": "6fb77eb45bf746ebaced7835a6e1d366",
+        "id": "23b31cf7ec8c4a6f9830b4b0fce3d410",
         "mode": "demo",
         "status": "completed",
         "action": "review",
@@ -711,7 +711,7 @@
   "contract_passed": 5,
   "code_sha256": {
     "src/llm_agent.py": "1988257c47b5948135124fb5baeb554df3af96e1fa066d5cfbac3e470d33594c",
-    "src/app.py": "8bfc1cd6bb8faa227983bdc5abcf5255c144621e85e87880e64832fb3604ef6c",
+    "src/app.py": "dc3926a36060830f4c9a4196bcbdf69501a57762c6e626c003ec5c3410b006dc",
     "docs/SKILL.md": "5e3514dcf3ad92e6f2ef16cf9b5de4499d89e6d2992f203eee2e35d346086a3c"
   }
 }
