@@ -1,0 +1,47 @@
+src/extended_experiments.py
+  s_3a54662688f7da::t_a540efaa0cb284 1-94,96-97,99,101-102
+  s_3a54662688f7da::t_39a695e41f892d 95,98,100
+docs/detail_sections.py
+  s_3a54662688f7da::t_179878e792d7c4 1-76,78-122
+  s_3a54662688f7da::t_d9b76987b45669 77
+README.md
+  s_3a54662688f7da::t_48c1142b813f22 68-79
+results/extended/figure_checks.txt
+  s_3a54662688f7da::t_d9b76987b45669 1-26
+figures/extended/calibration.svg
+  s_3a54662688f7da::t_d22bb77ecb0255 1-301
+figures/extended/cv_parameters.svg
+  s_3a54662688f7da::t_c67b884750ffdc 1-518
+figures/extended/learning_curve.svg
+  s_3a54662688f7da::t_631894ac78ba94 1-393
+figures/extended/ranking.svg
+  s_3a54662688f7da::t_94610753082e51 1-445
+figures/extended/threshold_tradeoff.svg
+  s_3a54662688f7da::t_279a0256158de5 1-362
+results/extended/analysis.json
+  s_3a54662688f7da::t_7ce98d300f9a51 1-780
+results/extended/cross_validation.csv
+  s_3a54662688f7da::t_71f0d3b15fc7e2 1-12
+results/extended/learning_curve.csv
+  s_3a54662688f7da::t_b8eb02fce5d17e 1-16
+results/extended/validation_thresholds.csv
+  s_3a54662688f7da::t_e4faff91d18b05 1-8
+results/report_word_count.json
+  s_3a54662688f7da::t_a5c6f5f886ef6d 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "99f33ff7f281b613ca8fee0d3e9783e03fdec543",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
