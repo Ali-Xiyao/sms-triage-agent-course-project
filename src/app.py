@@ -1,31 +1,72 @@
-"""Local UI + JSON API + CLI. Standard-library HTTP server, binds loopback only."""
-import sys,json,argparse
-from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
-from core import Agent,ROOT
-HTML='''<!doctype html><html lang="zh"><meta charset="utf-8"><title>短信风险分流 Agent</title><style>
-body{font:17px system-ui;background:#f5f6fa;color:#202b3c;margin:40px auto;max-width:1000px;padding:0 25px}h1{font-size:32px}small{color:#53657d}textarea{box-sizing:border-box;width:100%;height:140px;padding:16px;font:17px system-ui;border:1px solid #aebbd0;border-radius:10px}button{padding:12px 20px;margin:14px 8px 14px 0;border:0;border-radius:7px;background:#234e77;color:white;font-size:16px;cursor:pointer}section{background:white;border-radius:12px;padding:24px;margin-top:20px}li{padding:7px}pre{white-space:pre-wrap;word-break:break-all;font-size:14px}.tag{color:#234e77}#decision{font-size:24px}details{margin-top:18px}</style>
-<h1>短信风险分流 Agent</h1><p>英文短信本地分析 · 机器学习分类 · 静态链接检查 · 人工复核</p><small>不访问链接，不发送消息，不删除短信。仅支持英文为主的文本；模型分数不等于诈骗概率。</small>
-<section><label for="sms">短信内容</label><textarea id="sms" maxlength="5000">Congratulations! You won a FREE prize. Claim your cash now at https://bit.ly/example</textarea><button id="go">运行 Agent</button><button id="ham">填入正常样例</button><button id="cn">填入中文边界样例</button></section>
-<section id="result" hidden><div class="tag">分流结果</div><h2 id="decision"></h2><p id="score"></p><h3>执行轨迹</h3><ol id="steps"></ol><h3>特征依据</h3><p id="evidence"></p><h3>链接检查</h3><p id="links"></p><details><summary>查看结构化结果</summary><pre id="json"></pre></details></section>
-<script>const $=x=>document.getElementById(x);$('ham').onclick=()=>{$('sms').value='Hi, I will meet you at the library after class.'};$('cn').onclick=()=>{$('sms').value='您的快递异常，请点击链接。'};$('go').onclick=async()=>{ $('go').disabled=true;try{let r=await fetch('/api/triage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:$('sms').value})});let d=await r.json();$('result').hidden=false;$('decision').textContent=d.label||d.error;$('score').textContent=d.score==null?'未输出模型分数':'Spam 模型分数 '+d.score;$('steps').replaceChildren(...(d.trace||[]).map(s=>{let li=document.createElement('li');li.textContent=s.state+'：'+s.detail;return li}));$('evidence').textContent=(d.evidence||[]).map(e=>e.feature+' ('+e.contribution+')').join('，')||'无可用特征';$('links').textContent=JSON.stringify(d.links||[]);$('json').textContent=JSON.stringify(d,null,2)}catch(e){alert('本地服务请求失败，请检查终端')}finally{$('go').disabled=false}};</script></html>'''
+"""Loopback UI, CLI and JSON API for LLM agent + explicit offline baselines."""
+import sys, json, argparse
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from core import Agent
+from llm_agent import LLMAgent, Settings, ReviewStore, TOOLS
+HTML=r'''<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>短信分流与复核 Agent</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,sans-serif;color:#192d3d;background:#eef3f6}*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:36px auto;padding:0 24px}header{margin-bottom:28px}.eyebrow{font-size:13px;letter-spacing:2px;color:#397475;font-weight:700}h1{font-size:34px;margin:10px 0}h2{font-size:22px;margin-top:0}h3{font-size:16px}p{line-height:1.7}.muted,small{color:#52687a}.panel{background:#fff;border:1px solid #dce5eb;border-radius:15px;padding:24px;margin-bottom:20px}.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:20px}.badge{display:inline-block;border-radius:20px;background:#e4f1ec;color:#216447;padding:6px 11px;font-size:13px}.badge.warn{background:#fff0d5;color:#835a13}label{display:block;margin:14px 0 8px;font-weight:600}textarea,select,input{width:100%;border:1px solid #b7c7d3;border-radius:8px;padding:12px;background:#fff;color:inherit;font:15px system-ui}textarea{height:140px;resize:vertical}button{border:0;border-radius:8px;padding:11px 15px;margin:12px 7px 0 0;background:#245663;color:#fff;font:15px system-ui;cursor:pointer}button.secondary{background:#eaf0f4;color:#24485b}button:disabled{opacity:.5;cursor:wait}ol{padding-left:23px}li{padding:6px 0;font-size:14px;line-height:1.5}pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto;background:#f4f7f9;padding:14px;border-radius:8px}.notice{border-left:3px solid #d4a352;padding-left:14px;font-size:14px}.toolbar{display:flex;gap:10px;flex-wrap:wrap}#decision{font-size:25px;font-weight:700;margin:12px 0}#status{font-size:14px}#summary{white-space:pre-wrap;font-size:15px}.compact{font-size:14px}.tools{display:flex;gap:8px;flex-wrap:wrap}.tools span{background:#edf3f6;padding:5px 9px;border-radius:6px;font:12px ui-monospace,monospace}@media(max-width:800px){.grid{grid-template-columns:1fr}h1{font-size:28px}main{padding:0 16px}}
+</style><main>
+<header><div class="eyebrow">机器学习课程项目 · TOOL CALLING</div><h1>短信分流与人工复核 Agent</h1><p class="muted">大模型决定工具动作，课程分类器提供证据，人工确认最终建议。</p><span class="badge warn" id="connection">正在读取配置</span></header>
+<div class="grid"><section class="panel"><h2>1 设置任务</h2><label for="mode">运行方式</label><select id="mode"><option value="llm">真实大模型 API · 需配置密钥</option><option value="demo">离线协议演示 · 模拟LLM响应</option><option value="local">传统工作流基线 · 不使用LLM</option></select><p class="notice" id="modeNote">真实模式将短信与工具结果发送至你配置的API服务。密钥仅在服务器端配置。</p><label for="goal">任务目标</label><input id="goal" maxlength="500" value="分析短信，检查相关证据，给出分流建议并等待我确认。"><label for="sms">待分析短信</label><textarea id="sms" maxlength="5000">Congratulations! You won a FREE prize. Claim your cash now at https://bit.ly/example</textarea><div><button id="go">运行 Agent</button><button class="secondary" id="ham">正常样例</button><button class="secondary" id="cn">中文边界</button></div><p class="muted compact" id="progress">不会访问短信中的链接，也不会发送或删除短信。</p></section>
+<section class="panel"><h2>2 工具与执行过程</h2><div class="tools"><span>classify_sms</span><span>inspect_links</span><span>lookup_policy</span><span>submit_assessment</span></div><p class="muted compact">API返回工具请求 → 本地校验并执行 → 回传工具结果 → 模型决定下一步。</p><ol id="steps"><li>等待开始任务。</li></ol><details><summary>查看每次工具返回的实际证据</summary><pre id="tools">尚无工具结果</pre></details></section></div>
+<section class="panel" id="result" hidden><div class="toolbar"><span class="badge" id="status"></span><span class="badge warn" id="source"></span></div><div id="decision"></div><p id="score"></p><p id="summary"></p><p class="compact" id="evidence"></p><p class="compact" id="links"></p><div id="reviewPanel" hidden><h3>3 人工确认或修正</h3><select id="reviewDecision"><option value="likely_ham">确认为倾向正常</option><option value="likely_spam">确认为疑似垃圾短信</option><option value="review">保持人工复核</option></select><button id="confirm">确认并完成任务</button><small>确认只更新本次任务，不自动重新训练模型。</small></div><button class="secondary" id="export">导出任务报告 JSON</button><details><summary>完整结构化结果</summary><pre id="json"></pre></details></section>
+<section class="panel compact"><strong>配置方法</strong><p>复制项目根目录的 .env.example 为 .env，填写 LLM_API_KEY、LLM_BASE_URL 和支持工具调用的 LLM_MODEL，然后重启服务。交付文件中的 API Key 留空。</p><p class="muted">离线协议演示用于核验程序与工具，不代表真实大模型能力。机器学习分类实验与大模型任务评估分别统计。</p></section></main>
+<script>
+const $=x=>document.getElementById(x);let current=null;
+const notes={llm:'真实模式将短信与工具结果发送至你配置的API服务。密钥仅在服务器端配置。',demo:'当前为离线协议演示：工具由真实代码执行，模型响应来自模拟脚本；没有调用大模型。',local:'当前为传统分类与规则基线：用于对照，不包含大模型规划。'};
+$('mode').onchange=()=>{$('modeNote').textContent=notes[$('mode').value]};
+$('ham').onclick=()=>{$('sms').value='Hi, I will meet you at the library after class.'};$('cn').onclick=()=>{$('sms').value='您的快递异常，请点击链接。'};
+function render(d){current=d;$('progress').textContent='执行结束：'+(d.status||'baseline');$('result').hidden=false;$('decision').textContent=d.label||d.error;$('status').textContent=d.status||'baseline';$('source').textContent=d.mode==='demo'?'模拟LLM · 非真实API':d.mode==='llm'?'真实API模式':'离线工作流基线';$('score').textContent=d.score==null?'未输出分类分数':'课程模型 spam 分数：'+d.score+'（不是诈骗概率）';$('summary').textContent=d.summary||'传统工作流给出的分流建议。';$('steps').replaceChildren(...(d.trace||[]).map(x=>{let li=document.createElement('li');li.textContent=x.state+'：'+x.detail;return li}));$('tools').textContent=JSON.stringify(d.tool_results||[],null,2);$('evidence').textContent='特征依据：'+((d.evidence||[]).map(e=>e.feature+' ('+e.contribution+')').join('，')||'无');$('links').textContent='链接结果：'+JSON.stringify(d.links||[]);$('json').textContent=JSON.stringify(d,null,2);$('reviewPanel').hidden=d.status!=='pending_review';if(d.status==='pending_review')$('reviewDecision').value=d.action;if(d.review?.state==='confirmed')$('summary').textContent+='\n人工最终决定：'+d.review.decision+'；任务已完成。'}
+$('go').onclick=async()=>{$('go').disabled=true;$('progress').textContent='正在执行，请等待工具调用与模型响应……';$('result').hidden=true;try{let r=await fetch('/api/triage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:$('sms').value,goal:$('goal').value,mode:$('mode').value})});let d=await r.json();render(d);$('progress').textContent='执行结束：'+(d.status||'baseline')}catch(e){$('progress').textContent='本地服务请求失败，请检查终端。'}finally{$('go').disabled=false}};
+$('confirm').onclick=async()=>{if(!current)return;$('confirm').disabled=true;try{let r=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:current.id,decision:$('reviewDecision').value})});render(await r.json())}finally{$('confirm').disabled=false}};
+$('export').onclick=()=>{if(!current)return;let u=URL.createObjectURL(new Blob([JSON.stringify(current,null,2)],{type:'application/json'}));let a=document.createElement('a');a.href=u;a.download='sms-task-'+(current.id||'baseline')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+fetch('/api/status').then(r=>r.json()).then(d=>{$('connection').textContent=d.configured?'API配置已填写 · 连接尚需实际验证':'API Key 留空 · 可运行离线协议演示'}).catch(()=>{$('connection').textContent='配置读取失败'});
+</script></html>'''
+STORE = ReviewStore()
 class Handler(BaseHTTPRequestHandler):
-    agent=Agent()
-    def log_message(self,*a): pass  # Do not log private input.
-    def send_json(self,d,code=200):
-        data=json.dumps(d,ensure_ascii=False).encode();self.send_response(code);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(data)
+    agent = Agent()
+    def log_message(self, *a): pass
+    def send_json(self, d, code=200):
+        data = json.dumps(d, ensure_ascii=False).encode()
+        self.send_response(code); self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(data)
     def do_GET(self):
-        if self.path!='/':return self.send_json({'error':'not found'},404)
-        self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.end_headers();self.wfile.write(HTML.encode())
+        if self.path == '/api/status':
+            s = Settings.from_env()
+            return self.send_json({'configured': not s.missing(), 'missing': s.missing(), 'tools': [t['function']['name'] for t in TOOLS],
+                                   'live_api_verified': False, 'modes': ['llm', 'demo', 'local']})
+        if self.path != '/': return self.send_json({'error': 'not found'}, 404)
+        self.send_response(200); self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header('Cache-Control', 'no-store'); self.end_headers(); self.wfile.write(HTML.encode())
     def do_POST(self):
-        if self.path!='/api/triage':return self.send_json({'error':'not found'},404)
-        if self.headers.get('Origin') not in (None, f'http://{self.headers.get("Host")}'):return self.send_json({'error':'origin rejected'},403)
+        if self.path not in ('/api/triage', '/api/review'): return self.send_json({'error': 'not found'}, 404)
+        if self.headers.get('Origin') not in (None, f'http://{self.headers.get("Host")}'):
+            return self.send_json({'error': 'origin rejected'}, 403)
         try:
-            n=int(self.headers.get('Content-Length','0'))
-            if n<=0 or n>30000:raise ValueError('invalid body size')
-            data=json.loads(self.rfile.read(n)); result=self.agent.run(data.get('text'));self.send_json(result)
-        except (ValueError,TypeError,AttributeError):self.send_json({'error':'invalid JSON request'},400)
-        except Exception:self.send_json({'error':'service unavailable; 请人工复核'},503)
-if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--text');parser.add_argument('--port',type=int,default=8765);args=parser.parse_args()
-    if args.text is not None:print(json.dumps(Agent().run(args.text),ensure_ascii=False,indent=2))
-    else:print(f'本地界面 http://127.0.0.1:{args.port}',flush=True);ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
+            n = int(self.headers.get('Content-Length', '0'))
+            if n <= 0 or n > 30000: raise ValueError('body size')
+            data = json.loads(self.rfile.read(n))
+            if not isinstance(data, dict): raise ValueError('body type')
+            if self.path == '/api/review':
+                try: return self.send_json(STORE.confirm(data.get('id'), data.get('decision')))
+                except KeyError: return self.send_json({'error': '任务不存在或已过期'}, 404)
+                except ValueError: return self.send_json({'error': '任务不可确认或决定无效'}, 409)
+            mode = data.get('mode', 'llm')
+            if mode not in ('llm', 'demo', 'local'): raise ValueError('mode')
+            if mode == 'local': result = dict(self.agent.run(data.get('text')), mode='local', status='baseline')
+            else:
+                result = LLMAgent(mode=mode, baseline=self.agent).run(data.get('text'), data.get('goal', '分析短信，形成建议并等待人工确认。'))
+                if result['status'] == 'pending_review': STORE.add(result)
+            self.send_json(result)
+        except (ValueError, TypeError, AttributeError): self.send_json({'error': 'invalid JSON request'}, 400)
+        except Exception: self.send_json({'error': 'service unavailable; 请人工复核'}, 503)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(); parser.add_argument('--text'); parser.add_argument('--port', type=int, default=8765)
+    parser.add_argument('--mode', choices=['llm', 'demo', 'local'], default='llm'); args = parser.parse_args()
+    if args.text is not None:
+        result = dict(Agent().run(args.text), mode='local', status='baseline') if args.mode == 'local' else LLMAgent(mode=args.mode).run(args.text)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    else:
+        print(f'本地界面 http://127.0.0.1:{args.port}', flush=True)
+        ThreadingHTTPServer(('127.0.0.1', args.port), Handler).serve_forever()

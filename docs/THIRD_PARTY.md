@@ -1,6 +1,6 @@
 # 组件复用与来源
 
-没有调用第三方大模型API，没有复用其他学生项目，没有将宿主机的个人技能文件打包为开源代码。项目中的“短信分流 skill”是本项目编写的工作流；实际复用的核心工具是scikit-learn的特征提取和Pipeline。下表区分第三方实现与项目编排。
+新增LLM模式通过Python标准库实现OpenAI兼容API工具调用协议，API Key和模型ID留空，真实服务尚未运行。未引入第三方Agent框架或复制SDK代码。项目中的短信分流技能是本项目编写且运行时读取的任务契约；实际复用的课程工具是scikit-learn的特征提取和Pipeline。下表区分第三方实现与项目编排。
 
 | 名称 | 版本 | 许可 | 来源 | 用途及适配 |
 |---|---|---|---|---|
@@ -28,3 +28,7 @@
 行为核验：tests验证确定性、训练模型加载、异常输入、工具注入失败、无已知词、中文越界、短链覆盖、数据划分无重复。`results/component_audit.json`记录源码文件、SHA256和对应组件身份。`model_only`→`reject_only`→`full_agent`的消融直接验证模型与编排各自贡献，不将拒判视作预测成功。
 
 局限：TF-IDF不理解语用和上下文；字符片段解释可读性较差；predict_proba未做独立校准，只显示模型分数；静态域名规则不能确认恶意，也会要求复核正常短链接。
+
+## LLM协议与服务边界
+
+协议来源：OpenAI Function calling，https://developers.openai.com/api/docs/guides/function-calling ，核对日期2026-11-07。HTTP适配、工具执行器、ReviewStore与模拟客户端由本项目实现。没有提供大模型权重或第三方服务许可；真正调用时须遵守配置服务商的条款。仅本地分类和demo路径可离线；llm模式需要HTTPS访问配置的服务，发送短信和工具结果。

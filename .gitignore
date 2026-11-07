@@ -7,3 +7,7 @@ docs/build_report.py
 提交说明.md
 *.docx
 *.pdf
+.env
+.env.*
+!.env.example
+local_runs/

@@ -1,0 +1,5 @@
+[
+  {"case":"normal","text":"Hi I will meet you after class","expected_action":"likely_ham"},
+  {"case":"short_link","text":"Free prize cash now https://bit.ly/example","expected_action":"review"},
+  {"case":"chinese","text":"您的快递异常请点击链接","expected_action":"review"}
+]

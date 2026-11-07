@@ -1,0 +1,125 @@
+{
+  "id": "683e1c3726524934b42c7dd7b279db83",
+  "mode": "demo",
+  "status": "pending_review",
+  "action": "likely_ham",
+  "label": "倾向正常",
+  "score": 0.010291,
+  "evidence": [
+    {
+      "feature": " i ",
+      "contribution": -0.212
+    },
+    {
+      "feature": " cl",
+      "contribution": 0.1035
+    },
+    {
+      "feature": "cla",
+      "contribution": 0.089
+    },
+    {
+      "feature": " cla",
+      "contribution": 0.0857
+    },
+    {
+      "feature": " hi",
+      "contribution": -0.0853
+    }
+  ],
+  "links": [],
+  "trace": [
+    {
+      "state": "start",
+      "detail": "离线协议演示：模型响应由脚本模拟，非真实LLM。"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第1轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "classify_sms → T_CLASSIFY"
+    },
+    {
+      "state": "tool_result",
+      "detail": "lookup_policy → P_SCOPE"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第2轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "submit_assessment → T_SUBMIT"
+    },
+    {
+      "state": "await_human",
+      "detail": "工具证据已收齐，等待用户确认或修正；没有执行短信操作。"
+    }
+  ],
+  "tool_results": [
+    {
+      "name": "classify_sms",
+      "result": {
+        "id": "T_CLASSIFY",
+        "score": 0.010291,
+        "baseline_action": "likely_ham",
+        "evidence": [
+          {
+            "feature": " i ",
+            "contribution": -0.212
+          },
+          {
+            "feature": " cl",
+            "contribution": 0.1035
+          },
+          {
+            "feature": "cla",
+            "contribution": 0.089
+          },
+          {
+            "feature": " cla",
+            "contribution": 0.0857
+          },
+          {
+            "feature": " hi",
+            "contribution": -0.0853
+          }
+        ],
+        "scope": "english_historical_sms",
+        "boundary_states": []
+      }
+    },
+    {
+      "name": "lookup_policy",
+      "result": {
+        "id": "P_SCOPE",
+        "topic": "scope",
+        "text": "分类模型仅评估英文历史语料中的ham/spam倾向。中文、未知特征或模型不可用时转人工。不要把spam分数称为诈骗概率。",
+        "source": "knowledge/policies.json"
+      }
+    },
+    {
+      "name": "submit_assessment",
+      "result": {
+        "id": "T_SUBMIT",
+        "accepted": true,
+        "action": "likely_ham",
+        "requires_human_confirmation": true
+      }
+    }
+  ],
+  "summary": "离线协议演示：依据真实本地分类和规则结果形成建议；链接或适用范围存在限制时转人工。此说明由脚本生成，非大模型回答。",
+  "provider_response_received": false,
+  "review": {
+    "state": "pending"
+  },
+  "turns": 2,
+  "proposed_action": "likely_ham",
+  "evidence_ids": [
+    "T_CLASSIFY",
+    "P_SCOPE"
+  ],
+  "guard_overrode": false
+}

@@ -1,0 +1,170 @@
+{
+  "id": "f765f332fb33482cb5b11b3fc67c11c8",
+  "mode": "demo",
+  "status": "pending_review",
+  "action": "review",
+  "label": "需人工复核",
+  "score": 0.953052,
+  "evidence": [
+    {
+      "feature": "free",
+      "contribution": 0.1432
+    },
+    {
+      "feature": " free",
+      "contribution": 0.1402
+    },
+    {
+      "feature": "ize",
+      "contribution": 0.1399
+    },
+    {
+      "feature": "fre",
+      "contribution": 0.1227
+    },
+    {
+      "feature": "ree",
+      "contribution": 0.1227
+    }
+  ],
+  "links": [
+    {
+      "host": "bit.ly",
+      "flags": [
+        "短链接目的地不透明"
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "state": "start",
+      "detail": "离线协议演示：模型响应由脚本模拟，非真实LLM。"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第1轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "classify_sms → T_CLASSIFY"
+    },
+    {
+      "state": "tool_result",
+      "detail": "lookup_policy → P_SCOPE"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第2轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "inspect_links → T_LINKS"
+    },
+    {
+      "state": "tool_result",
+      "detail": "lookup_policy → P_LINKS"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第3轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "submit_assessment → T_SUBMIT"
+    },
+    {
+      "state": "await_human",
+      "detail": "工具证据已收齐，等待用户确认或修正；没有执行短信操作。"
+    }
+  ],
+  "tool_results": [
+    {
+      "name": "classify_sms",
+      "result": {
+        "id": "T_CLASSIFY",
+        "score": 0.953052,
+        "baseline_action": "likely_spam",
+        "evidence": [
+          {
+            "feature": "free",
+            "contribution": 0.1432
+          },
+          {
+            "feature": " free",
+            "contribution": 0.1402
+          },
+          {
+            "feature": "ize",
+            "contribution": 0.1399
+          },
+          {
+            "feature": "fre",
+            "contribution": 0.1227
+          },
+          {
+            "feature": "ree",
+            "contribution": 0.1227
+          }
+        ],
+        "scope": "english_historical_sms",
+        "boundary_states": []
+      }
+    },
+    {
+      "name": "lookup_policy",
+      "result": {
+        "id": "P_SCOPE",
+        "topic": "scope",
+        "text": "分类模型仅评估英文历史语料中的ham/spam倾向。中文、未知特征或模型不可用时转人工。不要把spam分数称为诈骗概率。",
+        "source": "knowledge/policies.json"
+      }
+    },
+    {
+      "name": "inspect_links",
+      "result": {
+        "id": "T_LINKS",
+        "links": [
+          {
+            "host": "bit.ly",
+            "flags": [
+              "短链接目的地不透明"
+            ]
+          }
+        ],
+        "network_access": false
+      }
+    },
+    {
+      "name": "lookup_policy",
+      "result": {
+        "id": "P_LINKS",
+        "topic": "links",
+        "text": "静态检查仅提取域名。短链接、数字IP或国际化域名标志要求人工核验；无标志不代表网站安全。不得访问、展开或执行短信中的链接。",
+        "source": "knowledge/policies.json"
+      }
+    },
+    {
+      "name": "submit_assessment",
+      "result": {
+        "id": "T_SUBMIT",
+        "accepted": true,
+        "action": "review",
+        "requires_human_confirmation": true
+      }
+    }
+  ],
+  "summary": "离线协议演示：依据真实本地分类和规则结果形成建议；链接或适用范围存在限制时转人工。此说明由脚本生成，非大模型回答。",
+  "provider_response_received": false,
+  "review": {
+    "state": "pending"
+  },
+  "turns": 3,
+  "proposed_action": "review",
+  "evidence_ids": [
+    "T_CLASSIFY",
+    "P_SCOPE",
+    "T_LINKS",
+    "P_LINKS"
+  ],
+  "guard_overrode": false
+}

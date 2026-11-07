@@ -1,0 +1,50 @@
+test_canonical_templates (test_agent.WorkflowTest.test_canonical_templates) ... ok
+test_chinese (test_agent.WorkflowTest.test_chinese) ... ok
+test_determinism (test_agent.WorkflowTest.test_determinism) ... ok
+test_empty (test_agent.WorkflowTest.test_empty) ... ok
+test_explanation (test_agent.WorkflowTest.test_explanation) ... ok
+test_ip_link (test_agent.WorkflowTest.test_ip_link) ... ok
+test_length (test_agent.WorkflowTest.test_length) ... ok
+test_missing_model (test_agent.WorkflowTest.test_missing_model) ... ok
+test_model_loaded (test_agent.WorkflowTest.test_model_loaded) ... ok
+test_null (test_agent.WorkflowTest.test_null) ... ok
+test_numeric_type (test_agent.WorkflowTest.test_numeric_type) ... ok
+test_privacy (test_agent.WorkflowTest.test_privacy) ... ok
+test_safe_link (test_agent.WorkflowTest.test_safe_link) ... ok
+test_short_link (test_agent.WorkflowTest.test_short_link) ... ok
+test_split_separation (test_agent.WorkflowTest.test_split_separation) ... ok
+test_tool_failure (test_agent.WorkflowTest.test_tool_failure) ... ok
+test_trace (test_agent.WorkflowTest.test_trace) ... ok
+test_unknown (test_agent.WorkflowTest.test_unknown) ... ok
+test_blank_model (test_llm_agent.AgentLoopTests.test_blank_model) ... ok
+test_cannot_change_classification_input (test_llm_agent.AgentLoopTests.test_cannot_change_classification_input) ... ok
+test_chinese_scope (test_llm_agent.AgentLoopTests.test_chinese_scope) ... ok
+test_conflict_forces_review (test_llm_agent.AgentLoopTests.test_conflict_forces_review) ... ok
+test_demo_normal_and_human_completion (test_llm_agent.AgentLoopTests.test_demo_normal_and_human_completion) ... ok
+test_early_finish_rejected (test_llm_agent.AgentLoopTests.test_early_finish_rejected) ... ok
+test_empty_key_never_calls_provider (test_llm_agent.AgentLoopTests.test_empty_key_never_calls_provider) ... ok
+test_fabricated_evidence_rejected (test_llm_agent.AgentLoopTests.test_fabricated_evidence_rejected) ... ok
+test_goal_validation (test_llm_agent.AgentLoopTests.test_goal_validation) ... ok
+test_input_validation (test_llm_agent.AgentLoopTests.test_input_validation) ... ok
+test_link_check_cannot_be_skipped (test_llm_agent.AgentLoopTests.test_link_check_cannot_be_skipped) ... ok
+test_malformed_arguments (test_llm_agent.AgentLoopTests.test_malformed_arguments) ... ok
+test_model_order_is_not_hardcoded (test_llm_agent.AgentLoopTests.test_model_order_is_not_hardcoded) ... ok
+test_plain_text_cannot_complete_task (test_llm_agent.AgentLoopTests.test_plain_text_cannot_complete_task) ... ok
+test_provider_failure (test_llm_agent.AgentLoopTests.test_provider_failure) ... ok
+test_repeated_ids_rejected (test_llm_agent.AgentLoopTests.test_repeated_ids_rejected) ... ok
+test_review_capacity_and_unknown_task (test_llm_agent.AgentLoopTests.test_review_capacity_and_unknown_task) ... ok
+test_schema_strictness (test_llm_agent.AgentLoopTests.test_schema_strictness) ... ok
+test_short_link_real_tools (test_llm_agent.AgentLoopTests.test_short_link_real_tools) ... ok
+test_tool_failure_forces_handoff (test_llm_agent.AgentLoopTests.test_tool_failure_forces_handoff) ... ok
+test_unknown_tool_is_not_executed (test_llm_agent.AgentLoopTests.test_unknown_tool_is_not_executed) ... ok
+test_api_review_and_config (test_llm_agent.HTTPTests.test_api_review_and_config) ... ok
+test_legacy_mode_remains_explicit (test_llm_agent.HTTPTests.test_legacy_mode_remains_explicit) ... ok
+test_http_failure_does_not_leak_body_or_key (test_llm_agent.TransportTests.test_http_failure_does_not_leak_body_or_key) ... ok
+test_https_required (test_llm_agent.TransportTests.test_https_required) ... ok
+test_redirects_not_followed (test_llm_agent.TransportTests.test_redirects_not_followed) ... ok
+test_wire_format_roundtrip (test_llm_agent.TransportTests.test_wire_format_roundtrip) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 1.724s
+
+OK
