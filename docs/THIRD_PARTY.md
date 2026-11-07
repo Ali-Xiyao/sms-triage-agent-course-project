@@ -13,6 +13,7 @@
 | Matplotlib | 3.10.7 | Matplotlib license（基于PSF） | https://matplotlib.org/stable/project/license.html | 实验图表；图表脚本为本项目编写 |
 | Python | 3.12系列 | PSF | https://www.python.org/psf/license/ | HTTP服务、URL静态解析、输入校验、unittest |
 | python-docx | 运行时版本见许可证导出 | MIT | https://github.com/python-openxml/python-docx | 报告构建辅助；非Agent运行依赖 |
+| docxcompose | 2.2.0 | MIT | https://github.com/4teamwork/docxcompose | 合并学校封面与报告正文；仅报告构建，不参与Agent推理 |
 
 所有第三方库均通过公开Python包仓库安装，未将其源码复制为本项目原创代码。完整许可文本与分发包元数据保存在 `docs/licenses/`；若不同平台依赖版本变化，应核对实际安装包的许可证。数据作者为Tiago Almeida和José María Gómez Hidalgo；本项目对数据做规范化分组和抽样处理。CC BY 4.0全文：https://creativecommons.org/licenses/by/4.0/legalcode 。数据许可不代表可忽略原文隐私，本项目界面不存储输入，错误展示做规则脱敏。
 
