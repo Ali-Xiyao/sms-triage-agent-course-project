@@ -1,0 +1,21 @@
+README.md
+  s_3a54662688f7da::t_a35f8a8e8169fc 104-107
+results/report_word_count.json
+  s_3a54662688f7da::t_0c945b4d78f7b4 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bff9d5f9b94309fbe5b370d8bde3fd8e8f1dca70",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
