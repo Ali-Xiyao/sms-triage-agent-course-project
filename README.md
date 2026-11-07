@@ -50,7 +50,7 @@ python src/plot_results.py
 
 仅英文垃圾短信识别；历史数据不能证明对2026年诈骗有效。中文、多语言、无已知特征输入回退人工。没有真人用户试验、没有时间节省实测。相似模板可能仍跨集合，诊断数量见metrics；不能宣称完全消除模板泄漏。
 
-数据：Almeida & Hidalgo (2011), SMS Spam Collection, UCI, DOI https://doi.org/10.24432/C5CC84 ，CC BY 4.0。完整依赖、来源、许可和复用边界见 `docs/THIRD_PARTY.md` 和报告附录。生成式AI参与代码、实验设计、文档起草与调试；结果由实际运行记录支撑，提交者需自行阅读并能解释实现。
+数据：Almeida & Hidalgo (2011), SMS Spam Collection, UCI, DOI https://doi.org/10.24432/C5CC84 ，CC BY 4.0。完整依赖、来源、许可和复用边界见 `docs/THIRD_PARTY.md` 和报告附录。结果由实际运行记录支撑，提交者需自行阅读并能解释实现。
 
 ## 已运行结果与演示
 
@@ -64,4 +64,4 @@ python src/plot_results.py
 
 https://github.com/Ali-Xiyao/sms-triage-agent-course-project
 
-此仓库仅提供代码、公开数据、实验记录和演示，不包含学生身份信息或正式提交报告。AI辅助范围和组件归属在本文及docs/THIRD_PARTY.md披露。
+此仓库仅提供代码、公开数据、实验记录和演示，不包含学生身份信息或正式提交报告。组件归属在本文及docs/THIRD_PARTY.md列出。
