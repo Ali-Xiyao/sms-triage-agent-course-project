@@ -84,19 +84,19 @@ def plots(data,y,p):
  def save(fig,name):
   fig.savefig(dest/(name+'.png'),dpi=300);fig.savefig(dest/(name+'.svg'));plt.close(fig)
  fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained')
- for k,color,marker in [('word','#0072B2','o'),('char','#D55E00','s')]:
+ for k,color,marker in [('word','#111111','o'),('char','#666666','s')]:
   rr=[r for r in data['cross_validation'] if r['kind']==k];ax.errorbar([r['parameter'] for r in rr],[r['f1'] for r in rr],yerr=[r['f1_sd'] for r in rr],marker=marker,color=color,label=k,linestyle='--' if k=='char' else '-')
  ax.set(xscale='log',ylim=(.65,1.01),xlabel='正则化参数 C 对数轴',ylabel='五折 F1 均值 ± 标准差',title='仅原训练集的交叉验证');ax.legend();ax.grid(alpha=.2);save(fig,'cv_parameters')
  fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained');lc=pd.DataFrame(data['learning_curve'])
- for key,color,marker,label in [('train_f1','#0072B2','o','训练'),('validation_f1','#D55E00','s','验证')]:
+ for key,color,marker,label in [('train_f1','#111111','o','训练'),('validation_f1','#666666','s','验证')]:
   for seed in [11,42,2026]:
    rr=lc[lc.seed==seed];ax.plot(rr.n,rr[key],color=color,alpha=.22,linewidth=1)
   gg=lc.groupby('n')[key].mean();ax.plot(gg.index,gg.values,color=color,marker=marker,label=label)
  ax.set(ylim=(.6,1.01),xlabel='训练样本数',ylabel='F1',title='训练量变化 细线为三个固定抽样种子');ax.legend(loc='lower right');ax.grid(alpha=.2);save(fig,'learning_curve')
- fig,axes=plt.subplots(1,2,figsize=(6.2,3),layout='constrained');prec,rec,_=precision_recall_curve(y,p);axes[0].plot(rec,prec,color='#0072B2');axes[0].axhline(np.mean(y),linestyle='--',color='gray');axes[0].set(xlim=(0,1),ylim=(0,1.03),xlabel='Recall',ylabel='Precision',title='A 测试集 PR 曲线')
- fpr,tpr,_=roc_curve(y,p);axes[1].plot(fpr,tpr,color='#D55E00');axes[1].plot([0,1],[0,1],'--',color='gray');axes[1].set(xlim=(0,1),ylim=(0,1.03),xlabel='假阳性率',ylabel='真阳性率',title='B 测试集 ROC 曲线');save(fig,'ranking')
- fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained');rr=data['calibration_test'];ax.plot([0,1],[0,1],'--',color='gray',label='分数与频率相等');ax.scatter([r['mean_score'] for r in rr],[r['spam_rate'] for r in rr],s=[20+np.sqrt(r['n'])*4 for r in rr],marker='s',color='#0072B2');ax.set(xlim=(-.025,1.025),ylim=(-.025,1.025),xlabel='分箱平均模型分数',ylabel='该箱实际 spam 比例',title='固定模型分数的校准诊断 点大小表示样本量');ax.legend();save(fig,'calibration')
- fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained');rr=data['thresholds_validation'];ax.plot([1-r['coverage'] for r in rr],[r['accepted_accuracy'] for r in rr],marker='o',color='#0072B2');
+ fig,axes=plt.subplots(1,2,figsize=(6.2,3),layout='constrained');prec,rec,_=precision_recall_curve(y,p);axes[0].plot(rec,prec,color='#111111');axes[0].axhline(np.mean(y),linestyle='--',color='gray');axes[0].set(xlim=(0,1),ylim=(0,1.03),xlabel='Recall',ylabel='Precision',title='A 测试集 PR 曲线')
+ fpr,tpr,_=roc_curve(y,p);axes[1].plot(fpr,tpr,color='#666666');axes[1].plot([0,1],[0,1],'--',color='gray');axes[1].set(xlim=(0,1),ylim=(0,1.03),xlabel='假阳性率',ylabel='真阳性率',title='B 测试集 ROC 曲线');save(fig,'ranking')
+ fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained');rr=data['calibration_test'];ax.plot([0,1],[0,1],'--',color='gray',label='分数与频率相等');ax.scatter([r['mean_score'] for r in rr],[r['spam_rate'] for r in rr],s=[20+np.sqrt(r['n'])*4 for r in rr],marker='s',color='#111111');ax.set(xlim=(-.025,1.025),ylim=(-.025,1.025),xlabel='分箱平均模型分数',ylabel='该箱实际 spam 比例',title='固定模型分数的校准诊断 点大小表示样本量');ax.legend();save(fig,'calibration')
+ fig,ax=plt.subplots(figsize=(6.2,3),layout='constrained');rr=data['thresholds_validation'];ax.plot([1-r['coverage'] for r in rr],[r['accepted_accuracy'] for r in rr],marker='o',color='#111111');
  # Numeric threshold pairs are provided in the adjacent report table.
  ax.set(xlabel='验证集复核比例',ylabel='接受正确率',ylim=(.97,1.005),title='验证集阈值敏感性 纵轴局部放大');ax.grid(alpha=.2);save(fig,'threshold_tradeoff')
 if __name__=='__main__':main()

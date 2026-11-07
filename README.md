@@ -89,17 +89,17 @@ python src/extended_experiments.py  # 55次CV拟合、15次学习曲线拟合等
 
 图表依赖中文字体；Linux可安装fonts-noto-cjk。补充实验结果保存在`results/extended/`，图在`figures/extended/`；均为冻结主结果后的探索性分析。
 
-## 文件结构
+## 文档导航
 
-- `src/llm_agent.py`：HTTPS兼容API、工具schema、动态执行循环、模拟客户端、人工复核状态。
-- `src/app.py`：三模式网页、CLI、`/api/status`、`/api/triage`、`/api/review`。
-- `src/core.py`：传统机器学习与静态规则基线；供LLM工具复用。
-- `knowledge/policies.json`、`docs/SKILL.md`：实际在运行时读取的规则与技能。
-- `src/experiment.py`、`src/extended_experiments.py`：原分类与补充实验。
-- `src/evaluate_llm_contract.py`、`src/evaluate_llm_live.py`：模拟软件验收与真实API功能评估分别执行。
-- `.env.example`：空密钥配置；`config/live_eval_cases.json`：可选联网功能样例。
-- `models/`、`data/`、`results/`、`figures/`：模型、公开语料与实测证据。
-- `docs/THIRD_PARTY.md`、`docs/licenses/`：来源、版本、许可与组件分析。
+正式报告保留主要方法、结果和结论，完整记录在仓库中：
+
+- [实验补充说明](docs/实验补充说明.md)：数据清洗、参数表、55次交叉验证拟合、学习曲线、阈值分析、全部16条误判和8张实验图。
+- [Agent设计](docs/LLM_AGENT.md)：模型选工具、结果回传、证据检查、人工确认及当前验证范围。
+- [接口与配置](docs/接口说明.md)：配置字段、HTTP请求、返回状态及导出方法。
+- [组件与许可证](docs/THIRD_PARTY.md)：依赖版本、来源、许可和适配说明。
+- [答辩提纲](docs/答辩提纲.md)：演示步骤和常见问题。
+
+实现入口为src/llm_agent.py与src/app.py；课程模型在src/core.py。主实验见results/metrics.json，补充实验见results/extended/，软件测试和浏览器记录见results/llm/。
 
 ## 限制与来源
 
