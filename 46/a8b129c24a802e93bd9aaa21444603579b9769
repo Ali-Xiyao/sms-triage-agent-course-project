@@ -1,0 +1,23 @@
+docs/THIRD_PARTY.md
+  s_3a54662688f7da::t_96fccc97f67c35 16
+docs/licenses/docxcompose/docxcompose-2.2.0.dist-info__licenses__LICENSE
+  s_3a54662688f7da::t_6674d22a21d87a 1-21
+requirements-report.txt
+  s_3a54662688f7da::t_9721de4b2922e6 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "46a8b129c24a802e93bd9aaa21444603579b9769",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
