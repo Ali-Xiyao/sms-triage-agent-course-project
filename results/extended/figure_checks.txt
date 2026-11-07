@@ -1,0 +1,26 @@
+
+--- figures/extended/calibration.png ---
+  category: raster  ext: png  size: 101419 B
+  pixels: 1860x900  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/extended/cv_parameters.png ---
+  category: raster  ext: png  size: 79506 B
+  pixels: 1860x900  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/extended/learning_curve.png ---
+  category: raster  ext: png  size: 75549 B
+  pixels: 1860x900  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/extended/ranking.png ---
+  category: raster  ext: png  size: 72085 B
+  pixels: 1860x900  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- figures/extended/threshold_tradeoff.png ---
+  category: raster  ext: png  size: 82028 B
+  pixels: 1860x900  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+

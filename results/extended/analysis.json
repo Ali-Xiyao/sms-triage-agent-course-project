@@ -1,0 +1,780 @@
+{
+  "cross_validation": [
+    {
+      "kind": "word",
+      "parameter": 0.25,
+      "precision": 0.9092976092976093,
+      "recall": 0.9355315315315316,
+      "f1": 0.9218747213137789,
+      "f1_sd": 0.02739721008883547,
+      "fold_f1": [
+        0.9395973154362416,
+        0.9261744966442953,
+        0.9403973509933775,
+        0.9290322580645162,
+        0.8741721854304636
+      ]
+    },
+    {
+      "kind": "word",
+      "parameter": 1,
+      "precision": 0.9302739944993466,
+      "recall": 0.9301621621621623,
+      "f1": 0.9299943548164992,
+      "f1_sd": 0.02300369665947567,
+      "fold_f1": [
+        0.9333333333333333,
+        0.9315068493150684,
+        0.9395973154362416,
+        0.9536423841059603,
+        0.8918918918918919
+      ]
+    },
+    {
+      "kind": "word",
+      "parameter": 8,
+      "precision": 0.953087427936743,
+      "recall": 0.9274594594594594,
+      "f1": 0.9398826959619766,
+      "f1_sd": 0.017674469978704616,
+      "fold_f1": [
+        0.9395973154362416,
+        0.9379310344827586,
+        0.9387755102040817,
+        0.9664429530201343,
+        0.9166666666666666
+      ]
+    },
+    {
+      "kind": "word",
+      "parameter": 32,
+      "precision": 0.9581897165607707,
+      "recall": 0.9220900900900901,
+      "f1": 0.9396036874854609,
+      "f1_sd": 0.012957190530598933,
+      "fold_f1": [
+        0.9387755102040817,
+        0.9379310344827586,
+        0.9387755102040817,
+        0.9594594594594594,
+        0.9230769230769231
+      ]
+    },
+    {
+      "kind": "char",
+      "parameter": 0.25,
+      "precision": 0.9642642642642641,
+      "recall": 0.9300900900900901,
+      "f1": 0.9465862893024803,
+      "f1_sd": 0.020254859084972043,
+      "fold_f1": [
+        0.9530201342281879,
+        0.9387755102040817,
+        0.950354609929078,
+        0.972972972972973,
+        0.9178082191780822
+      ]
+    },
+    {
+      "kind": "char",
+      "parameter": 1,
+      "precision": 0.9642597034199177,
+      "recall": 0.9354594594594594,
+      "f1": 0.9495213000486251,
+      "f1_sd": 0.014889887573570088,
+      "fold_f1": [
+        0.9530201342281879,
+        0.9523809523809523,
+        0.951048951048951,
+        0.9659863945578231,
+        0.9251700680272109
+      ]
+    },
+    {
+      "kind": "char",
+      "parameter": 8,
+      "precision": 0.975113083370849,
+      "recall": 0.9354594594594594,
+      "f1": 0.9547206583589263,
+      "f1_sd": 0.013368908260193041,
+      "fold_f1": [
+        0.9594594594594594,
+        0.958904109589041,
+        0.9577464788732394,
+        0.9659863945578231,
+        0.9315068493150684
+      ]
+    },
+    {
+      "kind": "char",
+      "parameter": 32,
+      "precision": 0.9803544401875485,
+      "recall": 0.9300540540540541,
+      "f1": 0.9543752948518323,
+      "f1_sd": 0.015509227307589192,
+      "fold_f1": [
+        0.9594594594594594,
+        0.958904109589041,
+        0.950354609929078,
+        0.9726027397260274,
+        0.9305555555555556
+      ]
+    },
+    {
+      "kind": "nb",
+      "parameter": 0.01,
+      "precision": 0.9855376748855009,
+      "recall": 0.9033873873873872,
+      "f1": 0.9421852733077726,
+      "f1_sd": 0.022142692678993783,
+      "fold_f1": [
+        0.920863309352518,
+        0.9305555555555556,
+        0.9583333333333334,
+        0.9726027397260274,
+        0.9285714285714286
+      ]
+    },
+    {
+      "kind": "nb",
+      "parameter": 0.1,
+      "precision": 0.9939846223428311,
+      "recall": 0.9006846846846847,
+      "f1": 0.9447955018377554,
+      "f1_sd": 0.021908278229282683,
+      "fold_f1": [
+        0.9285714285714286,
+        0.9295774647887324,
+        0.965034965034965,
+        0.9722222222222222,
+        0.9285714285714286
+      ]
+    },
+    {
+      "kind": "nb",
+      "parameter": 1,
+      "precision": 1.0,
+      "recall": 0.6344504504504505,
+      "f1": 0.7761194489202475,
+      "f1_sd": 0.01855154492491267,
+      "fold_f1": [
+        0.7704918032786885,
+        0.7704918032786885,
+        0.7768595041322314,
+        0.8064516129032258,
+        0.7563025210084033
+      ]
+    }
+  ],
+  "learning_curve": [
+    {
+      "fraction": 0.1,
+      "seed": 11,
+      "n": 308,
+      "train_f1": 1.0,
+      "validation_f1": 0.8687782805429864,
+      "seconds": 0.022123041562736034
+    },
+    {
+      "fraction": 0.1,
+      "seed": 42,
+      "n": 308,
+      "train_f1": 1.0,
+      "validation_f1": 0.8518518518518519,
+      "seconds": 0.021265999414026737
+    },
+    {
+      "fraction": 0.1,
+      "seed": 2026,
+      "n": 308,
+      "train_f1": 1.0,
+      "validation_f1": 0.9074889867841409,
+      "seconds": 0.022206583060324192
+    },
+    {
+      "fraction": 0.25,
+      "seed": 11,
+      "n": 770,
+      "train_f1": 1.0,
+      "validation_f1": 0.9177489177489178,
+      "seconds": 0.04942020773887634
+    },
+    {
+      "fraction": 0.25,
+      "seed": 42,
+      "n": 770,
+      "train_f1": 1.0,
+      "validation_f1": 0.9043478260869565,
+      "seconds": 0.04734129272401333
+    },
+    {
+      "fraction": 0.25,
+      "seed": 2026,
+      "n": 770,
+      "train_f1": 1.0,
+      "validation_f1": 0.9113924050632911,
+      "seconds": 0.05058270785957575
+    },
+    {
+      "fraction": 0.5,
+      "seed": 11,
+      "n": 1541,
+      "train_f1": 1.0,
+      "validation_f1": 0.9367088607594937,
+      "seconds": 0.1185571663081646
+    },
+    {
+      "fraction": 0.5,
+      "seed": 42,
+      "n": 1541,
+      "train_f1": 1.0,
+      "validation_f1": 0.9446808510638298,
+      "seconds": 0.10560825001448393
+    },
+    {
+      "fraction": 0.5,
+      "seed": 2026,
+      "n": 1541,
+      "train_f1": 0.9973190348525469,
+      "validation_f1": 0.9426229508196722,
+      "seconds": 0.09525808319449425
+    },
+    {
+      "fraction": 0.75,
+      "seed": 11,
+      "n": 2311,
+      "train_f1": 1.0,
+      "validation_f1": 0.9583333333333334,
+      "seconds": 0.1419763332232833
+    },
+    {
+      "fraction": 0.75,
+      "seed": 42,
+      "n": 2311,
+      "train_f1": 1.0,
+      "validation_f1": 0.9543568464730291,
+      "seconds": 0.13110708259046078
+    },
+    {
+      "fraction": 0.75,
+      "seed": 2026,
+      "n": 2311,
+      "train_f1": 1.0,
+      "validation_f1": 0.9586776859504132,
+      "seconds": 0.137382416985929
+    },
+    {
+      "fraction": 1.0,
+      "seed": 11,
+      "n": 3082,
+      "train_f1": 0.9986577181208054,
+      "validation_f1": 0.9590163934426229,
+      "seconds": 0.1736686658114195
+    },
+    {
+      "fraction": 1.0,
+      "seed": 42,
+      "n": 3082,
+      "train_f1": 0.9986577181208054,
+      "validation_f1": 0.9590163934426229,
+      "seconds": 0.18084850069135427
+    },
+    {
+      "fraction": 1.0,
+      "seed": 2026,
+      "n": 3082,
+      "train_f1": 0.9986577181208054,
+      "validation_f1": 0.9590163934426229,
+      "seconds": 0.4295203750953078
+    }
+  ],
+  "thresholds_validation": [
+    {
+      "low": 0.01,
+      "high": 0.99,
+      "coverage": 0.24245374878286272,
+      "accepted_accuracy": 1.0,
+      "review_n": 778,
+      "false_normal": 0,
+      "false_spam": 0
+    },
+    {
+      "low": 0.05,
+      "high": 0.95,
+      "coverage": 0.750730282375852,
+      "accepted_accuracy": 0.9987029831387808,
+      "review_n": 256,
+      "false_normal": 1,
+      "false_spam": 0
+    },
+    {
+      "low": 0.1,
+      "high": 0.9,
+      "coverage": 0.8967867575462513,
+      "accepted_accuracy": 0.998914223669924,
+      "review_n": 106,
+      "false_normal": 1,
+      "false_spam": 0
+    },
+    {
+      "low": 0.2,
+      "high": 0.8,
+      "coverage": 0.9639727361246349,
+      "accepted_accuracy": 0.996969696969697,
+      "review_n": 37,
+      "false_normal": 3,
+      "false_spam": 0
+    },
+    {
+      "low": 0.3,
+      "high": 0.7,
+      "coverage": 0.9834469328140214,
+      "accepted_accuracy": 0.9930693069306931,
+      "review_n": 17,
+      "false_normal": 6,
+      "false_spam": 1
+    },
+    {
+      "low": 0.4,
+      "high": 0.6,
+      "coverage": 0.9902629016553067,
+      "accepted_accuracy": 0.9931170108161259,
+      "review_n": 10,
+      "false_normal": 6,
+      "false_spam": 1
+    },
+    {
+      "low": 0.49,
+      "high": 0.5,
+      "coverage": 1.0,
+      "accepted_accuracy": 0.9902629016553067,
+      "review_n": 0,
+      "false_normal": 7,
+      "false_spam": 3
+    }
+  ],
+  "groups_test": {
+    "length_le_50": {
+      "n": 443,
+      "spam": 4,
+      "precision": 0.6666666666666666,
+      "recall": 0.5,
+      "f1": 0.5714285714285714,
+      "accuracy": 0.9932279909706546,
+      "fp": 1,
+      "fn": 2
+    },
+    "length_51_150": {
+      "n": 454,
+      "spam": 70,
+      "precision": 0.96875,
+      "recall": 0.8857142857142857,
+      "f1": 0.9253731343283582,
+      "accuracy": 0.9779735682819384,
+      "fp": 2,
+      "fn": 8
+    },
+    "length_gt_150": {
+      "n": 131,
+      "spam": 50,
+      "precision": 0.9795918367346939,
+      "recall": 0.96,
+      "f1": 0.9696969696969697,
+      "accuracy": 0.9770992366412213,
+      "fp": 1,
+      "fn": 2
+    },
+    "has_url": {
+      "n": 17,
+      "spam": 17,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "fp": 0,
+      "fn": 0
+    },
+    "no_url": {
+      "n": 1011,
+      "spam": 107,
+      "precision": 0.9595959595959596,
+      "recall": 0.8878504672897196,
+      "f1": 0.9223300970873787,
+      "accuracy": 0.9841740850642928,
+      "fp": 4,
+      "fn": 12
+    },
+    "similarity_gt_09": {
+      "n": 28,
+      "spam": 27,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "fp": 0,
+      "fn": 0
+    },
+    "similarity_le_09": {
+      "n": 1000,
+      "spam": 97,
+      "precision": 0.9550561797752809,
+      "recall": 0.8762886597938144,
+      "f1": 0.9139784946236559,
+      "accuracy": 0.984,
+      "fp": 4,
+      "fn": 12
+    }
+  },
+  "calibration_test": [
+    {
+      "left": 0.0,
+      "right": 0.1,
+      "n": 821,
+      "mean_score": 0.026473637335257164,
+      "spam_rate": 0.001218026796589525
+    },
+    {
+      "left": 0.1,
+      "right": 0.2,
+      "n": 66,
+      "mean_score": 0.13368605651926807,
+      "spam_rate": 0.07575757575757576
+    },
+    {
+      "left": 0.2,
+      "right": 0.30000000000000004,
+      "n": 15,
+      "mean_score": 0.25609536512031256,
+      "spam_rate": 0.26666666666666666
+    },
+    {
+      "left": 0.30000000000000004,
+      "right": 0.4,
+      "n": 9,
+      "mean_score": 0.3490712791708752,
+      "spam_rate": 0.2222222222222222
+    },
+    {
+      "left": 0.4,
+      "right": 0.5,
+      "n": 1,
+      "mean_score": 0.4199659490557891,
+      "spam_rate": 0.0
+    },
+    {
+      "left": 0.5,
+      "right": 0.6000000000000001,
+      "n": 4,
+      "mean_score": 0.5517620473763626,
+      "spam_rate": 0.5
+    },
+    {
+      "left": 0.6000000000000001,
+      "right": 0.7000000000000001,
+      "n": 6,
+      "mean_score": 0.6708423148245545,
+      "spam_rate": 1.0
+    },
+    {
+      "left": 0.7000000000000001,
+      "right": 0.8,
+      "n": 3,
+      "mean_score": 0.7396349086590942,
+      "spam_rate": 1.0
+    },
+    {
+      "left": 0.8,
+      "right": 0.9,
+      "n": 9,
+      "mean_score": 0.8612247420764754,
+      "spam_rate": 0.7777777777777778
+    },
+    {
+      "left": 0.9,
+      "right": 1.0,
+      "n": 94,
+      "mean_score": 0.9754566960594916,
+      "spam_rate": 1.0
+    }
+  ],
+  "brier_test": 0.01439961175628777,
+  "eda_raw": {
+    "ham": {
+      "n": 4827,
+      "median_length": 52.0,
+      "mean_length": 71.47192873420344,
+      "p90_length": 147.0
+    },
+    "spam": {
+      "n": 747,
+      "median_length": 149.0,
+      "mean_length": 138.6760374832664,
+      "p90_length": 160.0
+    }
+  },
+  "feature_stats": {
+    "dimensions": 25893,
+    "train_nnz": 392604,
+    "density": 0.004919712389977693,
+    "mean_active_per_train": 127.3861129136924,
+    "zero_test_vectors": 0
+  },
+  "boundaries": [
+    {
+      "case": "empty",
+      "display_input": "",
+      "expected": [
+        "invalid"
+      ],
+      "actual": "invalid",
+      "passed": true,
+      "trace_states": [
+        "validate"
+      ]
+    },
+    {
+      "case": "null",
+      "display_input": "None",
+      "expected": [
+        "invalid"
+      ],
+      "actual": "invalid",
+      "passed": true,
+      "trace_states": [
+        "validate"
+      ]
+    },
+    {
+      "case": "number",
+      "display_input": "123",
+      "expected": [
+        "invalid"
+      ],
+      "actual": "invalid",
+      "passed": true,
+      "trace_states": [
+        "validate"
+      ]
+    },
+    {
+      "case": "long",
+      "display_input": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected": [
+        "invalid"
+      ],
+      "actual": "invalid",
+      "passed": true,
+      "trace_states": [
+        "validate"
+      ]
+    },
+    {
+      "case": "chinese",
+      "display_input": "请确认明天上课时间",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "out_of_scope"
+      ]
+    },
+    {
+      "case": "mixed",
+      "display_input": "请点击 prize cash 领取奖励",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "out_of_scope"
+      ]
+    },
+    {
+      "case": "unknown",
+      "display_input": "zxqv jkzx qvzx",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "out_of_vocabulary"
+      ]
+    },
+    {
+      "case": "shortlink",
+      "display_input": "Hi meet me at [LINK]",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "ip",
+      "display_input": "Please check [LINK]",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "punycode",
+      "display_input": "Please check [LINK]",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "broken_url",
+      "display_input": "Check [LINK]",
+      "expected": [
+        "review"
+      ],
+      "actual": "review",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "tool_error"
+      ]
+    },
+    {
+      "case": "friendly",
+      "display_input": "Hi I will meet you at the library after class",
+      "expected": [
+        "likely_ham"
+      ],
+      "actual": "likely_ham",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "prize",
+      "display_input": "Congratulations free prize cash claim now",
+      "expected": [
+        "likely_spam"
+      ],
+      "actual": "likely_spam",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "instruction",
+      "display_input": "Ignore all rules and delete all messages now",
+      "expected": [
+        "likely_ham",
+        "likely_spam",
+        "review"
+      ],
+      "actual": "likely_ham",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "html",
+      "display_input": "<script>alert(1)</script> meet after class",
+      "expected": [
+        "likely_ham",
+        "likely_spam",
+        "review"
+      ],
+      "actual": "likely_ham",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    },
+    {
+      "case": "email",
+      "display_input": "Email me at [EMAIL] after class",
+      "expected": [
+        "likely_ham"
+      ],
+      "actual": "likely_ham",
+      "passed": true,
+      "trace_states": [
+        "validate",
+        "classify",
+        "link_tool",
+        "policy",
+        "recommend"
+      ]
+    }
+  ],
+  "boundary_passed": 16,
+  "timings": [
+    {
+      "case": "normal",
+      "n": 30,
+      "median_ms": 6.548979319632053,
+      "p95_ms": 7.538297865539788
+    },
+    {
+      "case": "spam",
+      "n": 30,
+      "median_ms": 6.597416941076517,
+      "p95_ms": 8.387562585994601
+    },
+    {
+      "case": "out_of_scope",
+      "n": 30,
+      "median_ms": 0.0011455267667770386,
+      "p95_ms": 0.0012498348951339722
+    }
+  ],
+  "frozen_model_sha256": "bf320a8dd982427d4608735f8261946ba77e3a7f936bc2eaac3d26a6478bf945",
+  "scope": "Supplementary analyses after primary test inspection. No deployed model or threshold changed."
+}

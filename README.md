@@ -65,3 +65,15 @@ python src/plot_results.py
 https://github.com/Ali-Xiyao/sms-triage-agent-course-project
 
 此仓库仅提供代码、公开数据、实验记录和演示，不包含学生身份信息或正式提交报告。组件归属在本文及docs/THIRD_PARTY.md列出。
+
+## 详细版报告对应的补充实验
+
+在主结果冻结后补充运行，保持原模型与阈值不变：
+
+```sh
+python src/extended_experiments.py
+```
+
+结果保存在`results/extended/`，图表保存在`figures/extended/`。包括11组配置共55次原训练集五折拟合、5种训练量与3个种子的15次学习曲线拟合、验证集7组阈值分析、固定测试模型的PR/ROC与校准诊断、7个子组结果、16项边界任务和三类路径各30次耗时记录。补充分析发生于主实验之后，属于探索性复核，不更新部署模型，也不把测试分析用于新参数选择。
+
+详细版正式报告包含完整错误样例及三种实际界面，正式身份报告仍只在本地提交包中提供。
