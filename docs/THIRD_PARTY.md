@@ -1,9 +1,11 @@
 # 组件复用与来源
 
-新增LLM模式通过Python标准库实现OpenAI兼容API工具调用协议，API Key和模型ID留空，真实服务尚未运行。未引入第三方Agent框架或复制SDK代码。项目中的短信分流技能是本项目编写且运行时读取的任务契约；实际复用的课程工具是scikit-learn的特征提取和Pipeline。下表区分第三方实现与项目编排。
+LLM模式通过Python标准库实现兼容工具协议，已用DeepSeek Flash非思考模式真实运行；公开Key为空，不分发服务凭据、权重或SDK。补充阶段实际采用K-Dense的scikit-learn技能1.5作离线审计；自编docs/SKILL.md则是运行契约。详细输入输出、权限、限制、读取与验证见SKILL_REUSE.md。
 
 | 名称 | 版本 | 许可 | 来源 | 用途及适配 |
 |---|---|---|---|---|
+| scikit-learn Skill | 1.5 / commit a25cf9ec00e2 | 技能元数据BSD-3-Clause；仓库MIT | https://github.com/K-Dense-AI/scientific-agent-skills/tree/a25cf9ec00e2745d03f8704acf6f6919694ccd9a/skills/scikit-learn | 开发复核；适配冻结1.7.2，7项离线检查 |
+| DeepSeek Flash API | 请求及返回deepseek-flash，2026-11-08 | 在线服务条款，不作为MIT依赖或权重分发 | https://api-docs.deepseek.com/guides/tool_calls/ | 非思考多轮工具调用；费用与隐私边界见真实实验 |
 | SMS Spam Collection | 2011 / SHA256见metrics | CC BY 4.0 | https://archive.ics.uci.edu/dataset/228/sms+spam+collection | 公开英文分类语料；保留原作者归属及readme；规范化去重、排除标签冲突 |
 | scikit-learn | 1.7.2 | BSD-3-Clause | https://github.com/scikit-learn/scikit-learn/tree/1.7.2 | TfidfVectorizer、Pipeline、NB、LR、评估与分层划分；自行配置参数和拒判工作流 |
 | NumPy | 2.3.5 | BSD-3-Clause | https://github.com/numpy/numpy/tree/v2.3.5 | 稀疏贡献计算、bootstrap、指标统计 |
@@ -32,3 +34,5 @@
 ## LLM协议与服务边界
 
 协议来源：OpenAI Function calling，https://developers.openai.com/api/docs/guides/function-calling ，核对日期2026-11-07。HTTP适配、工具执行器、ReviewStore与模拟客户端由本项目实现。没有提供大模型权重或第三方服务许可；真正调用时须遵守配置服务商的条款。仅本地分类和demo路径可离线；llm模式需要HTTPS访问配置的服务，发送短信和工具结果。
+
+外部技能相关引用：Kassis等(2026), Scientific Agent Skills, https://doi.org/10.48550/arXiv.2609.00065 。上游原文、文件哈希与仓库许可在reused_skills/scikit-learn。DeepSeek服务价格 https://api-docs.deepseek.com/quick_start/pricing/ ，2026-11-08核对。

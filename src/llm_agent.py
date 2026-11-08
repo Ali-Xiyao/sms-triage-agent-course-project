@@ -13,7 +13,7 @@ def load_env(path=None):
     path = Path(path or ROOT / '.env')
     if not path.exists():
         return
-    allowed = {'LLM_API_KEY', 'LLM_BASE_URL', 'LLM_MODEL', 'LLM_TIMEOUT_SECONDS', 'LLM_MAX_TURNS'}
+    allowed = {'LLM_API_KEY', 'LLM_BASE_URL', 'LLM_MODEL', 'LLM_TIMEOUT_SECONDS', 'LLM_MAX_TURNS', 'LLM_MAX_OUTPUT_TOKENS'}
     for raw in path.read_text().splitlines():
         raw = raw.strip()
         if not raw or raw.startswith('#') or '=' not in raw:
@@ -30,6 +30,7 @@ class Settings:
     model: str = ''
     timeout: float = 30
     max_turns: int = 6
+    max_output_tokens: int = 700
 
     @classmethod
     def from_env(cls):
@@ -39,7 +40,8 @@ class Settings:
             except ValueError: return default
         return cls(os.getenv('LLM_API_KEY', '').strip(), os.getenv('LLM_BASE_URL', 'https://api.openai.com/v1').strip(),
                    os.getenv('LLM_MODEL', '').strip(), bounded('LLM_TIMEOUT_SECONDS', 30, 1, 120),
-                   int(bounded('LLM_MAX_TURNS', 6, 1, 10)))
+                   int(bounded('LLM_MAX_TURNS', 6, 1, 10)),
+                   int(bounded('LLM_MAX_OUTPUT_TOKENS', 700, 128, 2000)))
 
     def missing(self):
         return [k for k, v in [('LLM_API_KEY', self.api_key), ('LLM_MODEL', self.model)] if not v]
@@ -58,6 +60,7 @@ class ChatClient:
     """OpenAI-compatible Chat Completions wire protocol; standard library only."""
     def __init__(self, settings):
         self.settings = settings
+        self.events = []
 
     def complete(self, messages, tools):
         s = self.settings
@@ -66,10 +69,22 @@ class ChatClient:
             raise ProviderError('invalid_endpoint')
         if '\r' in s.api_key or '\n' in s.api_key:
             raise ProviderError('invalid_key_format')
-        payload = {'model': s.model, 'messages': messages, 'tools': tools, 'tool_choice': 'auto'}
+        payload = {'model': s.model, 'messages': messages, 'tools': tools, 'tool_choice': 'auto',
+                   'max_tokens': s.max_output_tokens}
+        if u.hostname == 'api.deepseek.com':
+            # Standard endpoint does not enable DeepSeek's beta strict-schema mode.
+            payload['tools'] = json.loads(json.dumps(tools))
+            for item in payload['tools']: item['function'].pop('strict', None)
+            payload['thinking'] = {'type': 'disabled'}
+            payload['temperature'] = 0
         body = json.dumps(payload, ensure_ascii=False).encode()
         req = request.Request(s.base_url.rstrip('/') + '/chat/completions', data=body,
                               headers={'Content-Type': 'application/json', 'Authorization': 'Bearer ' + s.api_key})
+        audit = {'request_index': len(self.events) + 1, 'request_bytes': len(body),
+                 'model_requested': s.model, 'max_output_tokens': s.max_output_tokens,
+                 'response_received': False}
+        self.events.append(audit)
+        started = time.perf_counter()
         try:
             with request.build_opener(NoRedirect()).open(req, timeout=s.timeout) as response:
                 raw = response.read(2_000_001)
@@ -77,13 +92,24 @@ class ChatClient:
                 data = json.loads(raw)
             message = data['choices'][0]['message']
             if not isinstance(message, dict): raise ValueError()
+            audit.update(response_received=True, response_id=data.get('id'),
+                         model_returned=data.get('model'), usage=data.get('usage', {}),
+                         finish_reason=data['choices'][0].get('finish_reason'))
+            # Retain tool actions, not provider reasoning or credentials.
+            audit['tool_calls'] = message.get('tool_calls') or []
+            audit['content'] = str(message.get('content') or '')[:4000]
             return message
         except error.HTTPError as exc:
+            audit['error'] = 'http_' + str(exc.code)
             raise ProviderError('http_' + str(exc.code)) from None
         except (error.URLError, socket.timeout, TimeoutError):
+            audit['error'] = 'network_or_timeout'
             raise ProviderError('network_or_timeout') from None
         except (ValueError, KeyError, IndexError, TypeError):
+            audit['error'] = 'invalid_provider_response'
             raise ProviderError('invalid_provider_response') from None
+        finally:
+            audit['seconds'] = time.perf_counter() - started
 
 
 def function(name, description, properties=None):
@@ -160,6 +186,8 @@ class LLMAgent:
                   '再检索至少一条规则；短信含URL时必须inspect_links。最终只能通过submit_assessment提交。'
                   '不发送或删除短信，不访问网页。不得仅凭LLM主观判断替代分类器。'
                   '工具报错时可调整调用；不能伪造证据。不要输出隐藏思维链，只给简短可核验说明。\n任务技能：\n' + skill)
+        system += ('\n分类工具返回实际双阈值。只有分数严格大于ham_max且严格小于spam_min时，'
+                   '才能称为阈值间的中间区间。链接标志、越界或你主动选择保守复核时，须说明实际原因，不能编造分数处于中间区间。')
         messages = [{'role': 'system', 'content': system},
                     {'role': 'user', 'content': json.dumps({'goal': goal, 'sms': text}, ensure_ascii=False)}]
         observed = {}; seen = set(); count = 0; failures = False
@@ -206,6 +234,8 @@ class LLMAgent:
                             result = self.baseline.run(text, tool=lambda _: [])
                             result = {'id': 'T_CLASSIFY', 'score': result['score'], 'baseline_action': result['action'],
                                       'evidence': result['evidence'], 'scope': 'english_historical_sms',
+                                      'decision_thresholds': {'ham_max': self.baseline.bundle['thresholds'][0],
+                                                              'spam_min': self.baseline.bundle['thresholds'][1]} if not self.baseline.error else None,
                                       'boundary_states': [x['state'] for x in result['trace'] if x['state'] in ('out_of_scope', 'out_of_vocabulary', 'model_error')]}
                             run['score'] = result['score']; run['evidence'] = result['evidence']
                         else:

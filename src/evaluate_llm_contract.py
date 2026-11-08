@@ -25,7 +25,7 @@ def main():
     (out/'test_results.txt').write_text(stream.getvalue())
     model_hash=hashlib.sha256((ROOT/'models/model.joblib').read_bytes()).hexdigest()
     report={'kind':'scripted_protocol_and_software_tests','live_llm_calls':0,
-            'real_provider_quality':'not_evaluated_no_api_key','created_utc':datetime.now(timezone.utc).isoformat(),
+            'real_provider_quality':'outside_scripted_test_scope_see_live_evaluation_json','created_utc':datetime.now(timezone.utc).isoformat(),
             'unit_tests':{'run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'passed':result.wasSuccessful()},
             'missing_key_status':missing['status'],'model_sha256_unchanged_reference':model_hash,
             'contract_cases':outputs,'contract_passed':sum(x['passed'] for x in outputs),

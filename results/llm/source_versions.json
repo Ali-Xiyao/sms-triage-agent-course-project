@@ -1,0 +1,30 @@
+{
+  "historical_code_versions": {
+    "first_20_and_repaired_20_evaluator": {
+      "path": "docs/experiments/evaluate_llm_live_v1.py",
+      "sha256": "e24d926ff03dbacf7cfca0318a3d2f4a3e7e215eb78ac0707c583eee2b86b1c4"
+    },
+    "100_holdout_and_30_repeats_evaluator": {
+      "path": "docs/experiments/evaluate_llm_live_v2.py",
+      "sha256": "ced2ba1108b8e424050d9e60c8a678f078bfe180c6a821c7bc718bf2e5b77c6d"
+    },
+    "before_threshold_fix_executor": {
+      "path": "docs/experiments/llm_agent_threshold_baseline.py",
+      "sha256": "59a2295bcb0d91ffff55c14ddf2f3a641e2b0f5a80322895e2a632b9cf17f5e6"
+    },
+    "repaired_executor": {
+      "path": "src/llm_agent.py",
+      "sha256": "68153c4000c0cc5cc509068d972f90062c2fbf37c46d8f7bdd4a4f7e8bd2b52e"
+    }
+  },
+  "notes": "Historical result hashes refer to these preserved versions, not a claim that every historical evaluator is identical to the current CLI. Models and current executor were frozen throughout the holdout/repeat batches.",
+  "experiment_settings": {
+    "timeout_seconds": 90,
+    "max_turns": 6,
+    "max_output_tokens": 700,
+    "temperature": 0,
+    "thinking": "disabled",
+    "official_model": "deepseek-flash",
+    "extended_workers": 2
+  }
+}

@@ -1,0 +1,20 @@
+--- a/src/llm_agent.py
++++ b/src/llm_agent.py
+@@ -186,6 +186,8 @@
+                   '再检索至少一条规则；短信含URL时必须inspect_links。最终只能通过submit_assessment提交。'
+                   '不发送或删除短信，不访问网页。不得仅凭LLM主观判断替代分类器。'
+                   '工具报错时可调整调用；不能伪造证据。不要输出隐藏思维链，只给简短可核验说明。\n任务技能：\n' + skill)
++        system += ('\n分类工具返回实际双阈值。只有分数严格大于ham_max且严格小于spam_min时，'
++                   '才能称为阈值间的中间区间。链接标志、越界或你主动选择保守复核时，须说明实际原因，不能编造分数处于中间区间。')
+         messages = [{'role': 'system', 'content': system},
+                     {'role': 'user', 'content': json.dumps({'goal': goal, 'sms': text}, ensure_ascii=False)}]
+         observed = {}; seen = set(); count = 0; failures = False
+@@ -232,6 +234,8 @@
+                             result = self.baseline.run(text, tool=lambda _: [])
+                             result = {'id': 'T_CLASSIFY', 'score': result['score'], 'baseline_action': result['action'],
+                                       'evidence': result['evidence'], 'scope': 'english_historical_sms',
++                                      'decision_thresholds': {'ham_max': self.baseline.bundle['thresholds'][0],
++                                                              'spam_min': self.baseline.bundle['thresholds'][1]} if not self.baseline.error else None,
+                                       'boundary_states': [x['state'] for x in result['trace'] if x['state'] in ('out_of_scope', 'out_of_vocabulary', 'model_error')]}
+                             run['score'] = result['score']; run['evidence'] = result['evidence']
+                         else:

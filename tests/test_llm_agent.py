@@ -48,6 +48,10 @@ class AgentLoopTests(unittest.TestCase):
         r = LLMAgent(mode='demo').run('Free cash prize now at https://bit.ly/example')
         self.assertEqual(r['action'], 'review'); self.assertTrue(r['links'][0]['flags'])
         self.assertEqual(r['turns'], 3)
+    def test_threshold_evidence_matches_frozen_model(self):
+        r = LLMAgent(mode='demo').run('Hi I will meet you after class')
+        evidence = next(t['result'] for t in r['tool_results'] if t['name'] == 'classify_sms')
+        self.assertEqual(evidence['decision_thresholds'], {'ham_max': .49, 'spam_min': .50})
     def test_chinese_scope(self):
         r = LLMAgent(mode='demo').run('您的快递异常请点击链接')
         self.assertEqual(r['action'], 'review'); self.assertIsNone(r['score'])
@@ -113,6 +117,72 @@ class AgentLoopTests(unittest.TestCase):
 
 
 class TransportTests(unittest.TestCase):
+    def test_deepseek_non_thinking_and_usage_audit(self):
+        reply = {'id': 'test-response', 'model': 'deepseek-flash',
+                 'usage': {'prompt_tokens': 200, 'completion_tokens': 30},
+                 'choices': [{'message': {'role': 'assistant', 'content': None,
+                    'reasoning_content': 'PRIVATE_REASONING', 'tool_calls': []}, 'finish_reason': 'stop'}]}
+        with patch('llm_agent.request.build_opener') as p:
+            p.return_value.open.return_value = io.BytesIO(json.dumps(reply).encode())
+            client = ChatClient(Settings(api_key='PRIVATE_TEST_KEY', base_url='https://api.deepseek.com', model='deepseek-flash'))
+            client.complete([], TOOLS)
+            payload = json.loads(p.return_value.open.call_args.args[0].data)
+        self.assertEqual(payload['thinking'], {'type': 'disabled'})
+        self.assertEqual(payload['max_tokens'], 700)
+        self.assertNotIn('strict', payload['tools'][0]['function'])
+        self.assertTrue(TOOLS[0]['function']['strict'])
+        self.assertEqual(client.events[0]['usage']['prompt_tokens'], 200)
+        self.assertNotIn('PRIVATE_REASONING', json.dumps(client.events))
+        self.assertNotIn('PRIVATE_TEST_KEY', json.dumps(client.events))
+
+    def test_budget_stops_before_sending_request(self):
+        from evaluate_llm_live import BudgetClient
+        client = BudgetClient(Settings(api_key='test', model='deepseek-flash'), budget_usd=0.000001)
+        with patch('llm_agent.request.build_opener') as p:
+            with self.assertRaisesRegex(ProviderError, 'evaluation_budget_exhausted'): client.complete([], TOOLS)
+        p.assert_not_called(); self.assertEqual(client.events, [])
+
+    def test_request_count_limit_stops_before_sending(self):
+        from evaluate_llm_live import BudgetClient
+        client = BudgetClient(Settings(api_key='test', model='deepseek-flash'), max_calls=0)
+        with patch('llm_agent.request.build_opener') as p:
+            with self.assertRaises(ProviderError): client.complete([], TOOLS)
+        p.assert_not_called()
+
+    def test_separate_task_clients_share_request_limit(self):
+        from evaluate_llm_live import BudgetClient
+        first = BudgetClient(Settings(api_key='test', model='deepseek-flash'), max_calls=1)
+        second = BudgetClient(first.settings, max_calls=1, shared=first.shared)
+        with patch.object(ChatClient, 'complete', return_value={}) as send:
+            first.complete([], TOOLS)
+            with self.assertRaises(ProviderError): second.complete([], TOOLS)
+        self.assertEqual(send.call_count, 1)
+        self.assertEqual(first.reserved_usd, second.reserved_usd)
+
+    def test_natural_holdout_uses_only_unique_frozen_test_ids(self):
+        from evaluate_llm_live import load_cases
+        from core import ROOT
+        import csv
+        cases = load_cases(ROOT/'config/agent_holdout_plan.json')
+        natural = [c for c in cases if c['source'] == 'uci_fixed_test']
+        with (ROOT/'results/splits.csv').open() as stream:
+            test_ids = {r['id'] for r in csv.DictReader(stream) if r['split'] == 'test'}
+        self.assertEqual(len(cases), 100); self.assertEqual(len(natural), 80)
+        self.assertEqual(len({c['dataset_id'] for c in natural}), 80)
+        self.assertTrue({c['dataset_id'] for c in natural} <= test_ids)
+        self.assertEqual(sum(c['true_label'] for c in natural), 20)
+
+    def test_stability_plan_has_three_unchanged_inputs_per_task(self):
+        from evaluate_llm_live import load_cases
+        from core import ROOT
+        cases = load_cases(ROOT/'config/agent_stability_plan.json')
+        bases = {c['case_base'] for c in cases}
+        self.assertEqual(len(bases), 10); self.assertEqual(len(cases), 30)
+        for base in bases:
+            rows = [c for c in cases if c['case_base'] == base]
+            self.assertEqual({c['trial'] for c in rows}, {1, 2, 3})
+            self.assertEqual(len({c['text'] for c in rows}), 1)
+
     def test_https_required(self):
         with self.assertRaises(ProviderError): ChatClient(Settings(api_key='test', base_url='http://example.org', model='test')).complete([], TOOLS)
     def test_redirects_not_followed(self):

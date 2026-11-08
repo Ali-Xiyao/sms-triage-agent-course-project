@@ -35,16 +35,23 @@ test_repeated_ids_rejected (test_llm_agent.AgentLoopTests.test_repeated_ids_reje
 test_review_capacity_and_unknown_task (test_llm_agent.AgentLoopTests.test_review_capacity_and_unknown_task) ... ok
 test_schema_strictness (test_llm_agent.AgentLoopTests.test_schema_strictness) ... ok
 test_short_link_real_tools (test_llm_agent.AgentLoopTests.test_short_link_real_tools) ... ok
+test_threshold_evidence_matches_frozen_model (test_llm_agent.AgentLoopTests.test_threshold_evidence_matches_frozen_model) ... ok
 test_tool_failure_forces_handoff (test_llm_agent.AgentLoopTests.test_tool_failure_forces_handoff) ... ok
 test_unknown_tool_is_not_executed (test_llm_agent.AgentLoopTests.test_unknown_tool_is_not_executed) ... ok
 test_api_review_and_config (test_llm_agent.HTTPTests.test_api_review_and_config) ... ok
 test_legacy_mode_remains_explicit (test_llm_agent.HTTPTests.test_legacy_mode_remains_explicit) ... ok
+test_budget_stops_before_sending_request (test_llm_agent.TransportTests.test_budget_stops_before_sending_request) ... ok
+test_deepseek_non_thinking_and_usage_audit (test_llm_agent.TransportTests.test_deepseek_non_thinking_and_usage_audit) ... ok
 test_http_failure_does_not_leak_body_or_key (test_llm_agent.TransportTests.test_http_failure_does_not_leak_body_or_key) ... ok
 test_https_required (test_llm_agent.TransportTests.test_https_required) ... ok
+test_natural_holdout_uses_only_unique_frozen_test_ids (test_llm_agent.TransportTests.test_natural_holdout_uses_only_unique_frozen_test_ids) ... ok
 test_redirects_not_followed (test_llm_agent.TransportTests.test_redirects_not_followed) ... ok
+test_request_count_limit_stops_before_sending (test_llm_agent.TransportTests.test_request_count_limit_stops_before_sending) ... ok
+test_separate_task_clients_share_request_limit (test_llm_agent.TransportTests.test_separate_task_clients_share_request_limit) ... ok
+test_stability_plan_has_three_unchanged_inputs_per_task (test_llm_agent.TransportTests.test_stability_plan_has_three_unchanged_inputs_per_task) ... ok
 test_wire_format_roundtrip (test_llm_agent.TransportTests.test_wire_format_roundtrip) ... ok
 
 ----------------------------------------------------------------------
-Ran 45 tests in 1.751s
+Ran 52 tests in 2.600s
 
 OK

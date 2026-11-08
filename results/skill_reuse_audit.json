@@ -1,0 +1,43 @@
+{
+  "skill_source": {
+    "name": "scikit-learn",
+    "skill_version": "1.5",
+    "upstream_commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+    "source": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/a25cf9ec00e2745d03f8704acf6f6919694ccd9a/skills/scikit-learn",
+    "skill_declared_license": "BSD-3-Clause license",
+    "repository_license": "MIT, reproduced in REPOSITORY_LICENSE.md; individual metadata retained in SKILL.md",
+    "original_files_unmodified": true,
+    "use": "Development-time ML audit, not runtime SMS planning or a remotely executed plugin.",
+    "adaptation": "Upstream instructions target sklearn 1.9.1; keep frozen sklearn 1.7.2 artifact and apply compatible Pipeline/fit/transform/metric guidance. Do not execute upstream install or example scripts.",
+    "files_sha256": {
+      "REPOSITORY_LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "SKILL.md": "a1765797d072ab40094522abe68fb04505d0881f66b7dfceeb8582422dbe488d",
+      "references/pipelines_and_composition.md": "a1810cd67dc9141d962fa1972e11b06be6bd437213e10a563e5ec4256fb274a9",
+      "references/model_evaluation.md": "e6f581c0ce2abffaac2f0bafc1a7bfbe86ec18f8969c6e9b91cc732a12a5fea5"
+    }
+  },
+  "kind": "offline_skill_guided_frozen_model_audit",
+  "checks": {
+    "frozen_train_vocabulary_matches_refit": true,
+    "frozen_train_idf_matches_refit": true,
+    "heldout_transform_does_not_learn_vocabulary": true,
+    "test_scores_replay": true,
+    "precision_recall_f1_replay": true,
+    "split_group_ids_disjoint": true,
+    "trusted_model_bytes_unchanged": true
+  },
+  "passed": true,
+  "metrics": {
+    "precision": 0.9655172413793104,
+    "recall": 0.9032258064516129,
+    "f1": 0.9333333333333333
+  },
+  "model_sha256": "bf320a8dd982427d4608735f8261946ba77e3a7f936bc2eaac3d26a6478bf945",
+  "train_n": 3082,
+  "test_n": 1028,
+  "limitations": [
+    "Does not establish no semantic template leakage.",
+    "No time/source identifiers exist for time/group deployment validation.",
+    "Upstream skill is development guidance; runtime task skill is separately self-authored."
+  ]
+}

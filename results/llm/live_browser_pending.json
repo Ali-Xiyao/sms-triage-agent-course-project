@@ -1,0 +1,179 @@
+{
+  "id": "6b0289456b564ed58f879d1f8e31194a",
+  "mode": "llm",
+  "status": "pending_review",
+  "action": "review",
+  "label": "需人工复核",
+  "score": 0.953052,
+  "evidence": [
+    {
+      "feature": "free",
+      "contribution": 0.1432
+    },
+    {
+      "feature": " free",
+      "contribution": 0.1402
+    },
+    {
+      "feature": "ize",
+      "contribution": 0.1399
+    },
+    {
+      "feature": "fre",
+      "contribution": 0.1227
+    },
+    {
+      "feature": "ree",
+      "contribution": 0.1227
+    }
+  ],
+  "links": [
+    {
+      "host": "bit.ly",
+      "flags": [
+        "短链接目的地不透明"
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "state": "start",
+      "detail": "真实API工具调用循环"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第1轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "classify_sms → T_CLASSIFY"
+    },
+    {
+      "state": "tool_result",
+      "detail": "inspect_links → T_LINKS"
+    },
+    {
+      "state": "tool_result",
+      "detail": "lookup_policy → P_LINKS"
+    },
+    {
+      "state": "tool_result",
+      "detail": "lookup_policy → P_UNCERTAINTY"
+    },
+    {
+      "state": "llm_request",
+      "detail": "第2轮：请求下一步工具动作。"
+    },
+    {
+      "state": "tool_result",
+      "detail": "submit_assessment → T_SUBMIT"
+    },
+    {
+      "state": "await_human",
+      "detail": "工具证据已收齐，等待用户确认或修正；没有执行短信操作。"
+    }
+  ],
+  "tool_results": [
+    {
+      "name": "classify_sms",
+      "result": {
+        "id": "T_CLASSIFY",
+        "score": 0.953052,
+        "baseline_action": "likely_spam",
+        "evidence": [
+          {
+            "feature": "free",
+            "contribution": 0.1432
+          },
+          {
+            "feature": " free",
+            "contribution": 0.1402
+          },
+          {
+            "feature": "ize",
+            "contribution": 0.1399
+          },
+          {
+            "feature": "fre",
+            "contribution": 0.1227
+          },
+          {
+            "feature": "ree",
+            "contribution": 0.1227
+          }
+        ],
+        "scope": "english_historical_sms",
+        "decision_thresholds": {
+          "ham_max": 0.49,
+          "spam_min": 0.5
+        },
+        "boundary_states": []
+      }
+    },
+    {
+      "name": "inspect_links",
+      "result": {
+        "id": "T_LINKS",
+        "links": [
+          {
+            "host": "bit.ly",
+            "flags": [
+              "短链接目的地不透明"
+            ]
+          }
+        ],
+        "network_access": false
+      }
+    },
+    {
+      "name": "lookup_policy",
+      "result": {
+        "id": "P_LINKS",
+        "topic": "links",
+        "text": "静态检查仅提取域名。短链接、数字IP或国际化域名标志要求人工核验；无标志不代表网站安全。不得访问、展开或执行短信中的链接。",
+        "source": "knowledge/policies.json"
+      }
+    },
+    {
+      "name": "lookup_policy",
+      "result": {
+        "id": "P_UNCERTAINTY",
+        "topic": "uncertainty",
+        "text": "模型中间分数或工具失败时转人工。不伪造未调用工具的结果。LLM不得凭文本断言已经验证发送者身份或认定诈骗。",
+        "source": "knowledge/policies.json"
+      }
+    },
+    {
+      "name": "submit_assessment",
+      "result": {
+        "id": "T_SUBMIT",
+        "accepted": true,
+        "action": "review",
+        "requires_human_confirmation": true
+      }
+    }
+  ],
+  "summary": "课程分类器给出 spam 分数 0.953（高于 spam_min=0.5，基线建议 likely_spam），主要特征为 \"free\" 等词，属统计关联，不证明因果，也不是诈骗概率。静态链接检查发现 bit.ly 短链接，标志为“短链接目的地不透明”，未联网访问。依据 P_LINKS，短链接要求人工核验；无标志也不代表网站安全。因此建议转人工复核，等待用户确认。",
+  "provider_response_received": true,
+  "review": {
+    "state": "pending"
+  },
+  "turns": 2,
+  "proposed_action": "review",
+  "evidence_ids": [
+    "T_CLASSIFY",
+    "T_LINKS",
+    "P_LINKS",
+    "P_UNCERTAINTY"
+  ],
+  "guard_overrode": false,
+  "api_usage": {
+    "requests": 2,
+    "responses": 2,
+    "models": [
+      "deepseek-flash"
+    ],
+    "prompt_tokens": 3370,
+    "completion_tokens": 295
+  }
+}

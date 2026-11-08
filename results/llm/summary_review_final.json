@@ -1,0 +1,7 @@
+{
+  "method": "Check generated summaries against the explicit numerical threshold interval (0.49,0.50) and recorded tool values; compare the same 20 cases. Codex-assisted semantic review; no independent human blinded evaluator and no paid evaluation API.",
+  "n": 20,
+  "unsupported_middle_interval_claim_cases": [],
+  "unsupported_middle_interval_claim_count": 0,
+  "limitations": "A targeted threshold-error check, not an exhaustive guarantee of summary factual correctness."
+}

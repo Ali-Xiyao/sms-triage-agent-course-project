@@ -26,7 +26,7 @@ flowchart TD
 
 ## 模块契约
 
-`ChatClient.complete(messages, tools)`发送HTTPS POST到`LLM_BASE_URL/chat/completions`。载荷为model、messages、tools、tool_choice=auto。工具schema使用strict=true；对象additionalProperties=false，所有属性进入required。按照官方协议保存assistant.tool_calls，并逐条加入role=tool、tool_call_id和JSON结果。服务商是否支持该协议及模型需要用户实际验证。
+`ChatClient.complete(messages, tools)`发送HTTPS POST到`LLM_BASE_URL/chat/completions`。载荷含model、messages、tools、tool_choice=auto、max_tokens。内部工具schema使用strict=true；DeepSeek标准端点适配时删除beta strict标记并关闭思考模式，执行器校验保留；对象additionalProperties=false，所有属性进入required。按照官方协议保存assistant.tool_calls，并逐条加入role=tool、tool_call_id和JSON结果。已验证DeepSeek Flash官方端点；其他服务兼容性仍需验证。
 
 只从服务器环境或项目根目录.env读密钥。配置缺失不会创建客户端网络请求。连接超时、401、429或5xx等错误以类别返回，不记录原始响应正文。禁止跟随HTTP重定向，避免携带Authorization头跨站。返回体最多2MB。客户端不自动重试已计费请求；普通文本响应和参数错误可在轮次预算内由模型继续。
 
@@ -42,24 +42,32 @@ pending_review只是自动阶段完成；只有用户通过/api/review确认或�
 
 | 模式 | 模型响应来源 | 工具 | 当前验证 |
 |---|---|---|---|
-| llm | 用户配置的真实API | 相同真实本地工具 | 空密钥路径与替代HTTP响应测试；真实API未运行 |
+| llm | 用户配置的真实API | 相同真实本地工具 | 修复40次、新任务100次、重复30次与真实浏览器闭环 |
 | demo | ProtocolDemoClient脚本 | 相同真实本地工具 | 已实际运行浏览器闭环；明确标注模拟 |
 | local | 无LLM | 固定分类与链接工作流 | 原分类实验、边界与消融 |
 
-45项测试包含：真实工具分支、改输入参数拒绝、伪造证据拒绝、跳过链接检查拒绝、未知工具拒绝、模型与分类器冲突转人工、普通文本不能结束、重复ID拒绝、API错误处理、HTTPS与重定向限制、HTTP消息回传、人工修正与重复确认、容量边界，以及原18项测试。5类协议场景全部符合契约，不能称为5例真实LLM成功。
+52项测试包含：真实工具分支、改输入参数拒绝、伪造证据拒绝、跳过链接检查拒绝、未知工具拒绝、模型与分类器冲突转人工、普通文本不能结束、重复ID拒绝、API错误处理、HTTPS与重定向限制、HTTP消息回传、人工修正与重复确认、容量边界，以及原18项测试。5类协议场景全部符合契约，不能称为5例真实LLM成功。
 
-真实API验收入口为src/evaluate_llm_live.py。填好配置后会发送config/live_eval_cases.json的三条构造样例，记录状态、动作、轮次和本机耗时；只用于接口功能验收，不替代1028条公开测试分类指标，也不等于真实用户评估。目前未运行，不给出LLM质量、费用或时延结论。
+真实API入口src/evaluate_llm_live.py，20条公开构造任务；只允许官方DeepSeek Flash端点，限制预算和请求数。初版和修复版分别58次有效响应、18/20符合预设动作。分类器未重训，阈值从0.49/0.50原样作为工具证据补全；针对性摘要错误从4条降至0条。模型仍可主动转人工，这可能偏离预期，按失败保留。详见[真实实验](真实Agent实验.md)。
+
+`ChatClient.events`只采集响应ID、模型ID、usage、工具调用和简短内容，不保存凭据或隐藏思维链。公开结果经检查为构造样本；日常个人短信运行结果默认不发布。
 
 ## 与评分标准的关系
 
 - 机器学习：保留训练、独立测试、基线与误差分析，LLM必须调用课程模型。
 - Agent：目标输入、模型选工具、执行与观察循环、证据约束、人工确认、完成状态和导出形成任务闭环。
 - 工具数据：真实本地分类、URL解析和版本化规则读取。
-- 复用：深入分析sklearn，API协议有官方来源；不把自编技能说成外部成果。
-- 评估：分类质量、软件契约、浏览器操作与未来真实LLM任务质量分别统计。
+- 复用：实际采用并深入分析K-Dense scikit-learn开发技能，7项审计；API协议有官方来源；不把自编技能说成外部成果。
+- 评估：分类质量、软件契约、浏览器操作与真实LLM功能任务结果分别统计。
 
-未填Key满足“代码与配置交付”的用户要求，但不能证明真实LLM端到端已经运行。若教师要求当场真实大模型演示，仍需填写有效配置并通过验收。是否得分取决于教师，不以大模型或篇幅本身预测成绩。
+公开Key保持为空，本地真实模式已用有效配置运行；复现者自行配置。20条任务不足以保证教师现场的所有输入成功，不以篇幅或调用数量预测分数。
 
 ## 来源
 
 OpenAI. Function calling. https://developers.openai.com/api/docs/guides/function-calling ，核对日期2026-11-07。使用的是公开API协议，没有分发大模型权重、SDK源码或服务凭据。使用服务时应遵循所选提供商的条款。
+
+DeepSeek Tool Calls https://api-docs.deepseek.com/guides/tool_calls/ ，2026-11-08核对。实际配置采用deepseek-flash非思考模式。
+
+## 扩展实测
+
+100条新任务（80条随机公开测试短信＋20条新构造任务）均取得必需证据；80条原标签匹配75条，local为77条，3条spam漏判未减少。10条额外各跑3次，动作均一致而工具名序列仅7条一致。170次批量任务共493请求，保守估算0.3157美元，详见真实Agent实验.md。

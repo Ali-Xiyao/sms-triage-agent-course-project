@@ -1,6 +1,6 @@
 # 短信分流与人工复核 Agent
 
-机器学习课程项目。**大模型通过工具调用执行任务，本地TF-IDF＋逻辑回归提供分类证据，用户确认或修正后完成任务。** 原离线分类与规则流程保留为对照。API Key与模型ID默认留空；真实大模型尚未联网实测，交付不包含密钥或伪造的LLM结果。
+机器学习课程项目。**大模型通过工具调用执行任务，本地TF-IDF＋逻辑回归提供分类证据，用户确认或修正后完成任务。** 原离线分类与规则流程保留为对照。已完成DeepSeek Flash真实工具调用实验和网页确认演示；公开配置Key留空，默认模型为低价Flash。
 
 ## 运行
 
@@ -25,13 +25,14 @@ cp .env.example .env
 
 ```dotenv
 LLM_API_KEY=
-LLM_BASE_URL=https://api.openai.com/v1
-LLM_MODEL=
+LLM_BASE_URL=https://api.deepseek.com
+LLM_MODEL=deepseek-flash
 LLM_TIMEOUT_SECONDS=30
 LLM_MAX_TURNS=6
+LLM_MAX_OUTPUT_TOKENS=700
 ```
 
-`LLM_MODEL`填服务商实际提供、支持Chat Completions函数工具调用的模型ID。`LLM_BASE_URL`为服务商HTTPS根路径（通常包含`/v1`，不含`/chat/completions`）。环境变量优先于.env。配置后重启。这里提供OpenAI兼容协议，不承诺所有兼容服务都支持相同工具schema；不支持时应更换支持工具调用的模型或服务，而不是删除证据检查。
+`LLM_MODEL`填服务商实际提供、支持Chat Completions函数工具调用的模型ID。`LLM_BASE_URL`为服务商HTTPS根路径（通常包含`/v1`，不含`/chat/completions`）。环境变量优先于.env。配置后重启。DeepSeek标准接口使用非思考模式，关闭其beta strict字段；本地证据与参数检查仍执行。其他兼容服务未全面验证。
 
 真实模式会把短信、任务目标与工具结果发给该API服务；界面已提示。密钥不进入浏览器、任务结果或公开文件。不访问短信中的URL，不发送或删除短信。
 
@@ -71,15 +72,22 @@ python src/evaluate_llm_contract.py
 python src/evaluate_llm_live.py
 ```
 
-45项软件测试通过，含原18项和新增27项。5类模拟协议任务调用真实工具并经人工确认状态接口完成。HTTP传输使用替代响应核验消息序列、参数、回传结果；**真实API调用次数为0，不报告真实LLM任务完成率、质量、时延或费用**。`results/llm/contract_evaluation.json`记录范围与代码哈希；`browser_*.json`和下方截图来自实际浏览器操作的离线协议模式。真实评估脚本需密钥，其输出保存在默认不公开的`local_runs/`。
+52项软件测试、5类模拟协议任务和7项复用审计通过。真实API证据分四批：20条修复前、同20条修复后、100条新任务、10条各3次重复，共170次批量任务执行、493次实际请求。
 
-![模拟LLM工具循环与人工确认的实际界面](docs/llm/human_confirmed.jpg)
+- 80条公开短信：local匹配77/80，LLM匹配75/80；LLM额外复核2条原ham，双方保留3条spam漏判。
+- 新边界/链接10条符合固定目标；新注入10条满足工具与证据契约，不能称分类全对。
+- 10条×3次动作均一致，但仅7条工具名序列相同，摘要均非逐字一致。
+- 首轮发现的4条阈值误述，显式返回阈值后在修复组降至0条。没有证明LLM提升分类或用户效率。
+
+按官方较高价格、忽略缓存的保守估算，四批API合计0.3157美元（非账单，另有两次浏览器演示）。公开响应ID、usage、全轨迹、五条自然短信偏差、冻结计划及源文件版本见[真实Agent实验](docs/真实Agent实验.md)与results/llm/。120个不同文本，重复运行不当作新增独立样本。
+
+![DeepSeek真实API工具调用与人工确认](docs/llm/live_completed.png)
 
 ## 课程机器学习实验
 
 公开数据原始5574条，规范化分组去重后5137条；训练/验证/测试为3082/1027/1028。仅训练集拟合词表和模型；验证集选出字符LR。独立测试Precision=0.9655、Recall=0.9032、F1=0.9333。词LR F1=0.9212，多数类0，关键词0.5417。模型冻结，没有因为加入LLM而重新选择测试结果。
 
-原`model_only`、`reject_only`、`full_agent`三行是**离线基线流程的消融**，不代表新LLM版本；拒判没有减少测试错误。LLM不会替代课程模型输出未经评估的中文分类概率。大模型调度是否改善实际用户任务尚待真实API与用户任务验证。
+原`model_only`、`reject_only`、`full_agent`三行是**离线基线流程的消融**，不代表新LLM版本；拒判没有减少测试错误。LLM不会替代课程模型输出未经评估的中文分类概率。真实API功能已实测；是否改善实际用户任务仍需独立数据和用户研究。
 
 ```sh
 python src/experiment.py             # 重训，会覆盖模型和主结果
@@ -94,6 +102,8 @@ python src/extended_experiments.py  # 55次CV拟合、15次学习曲线拟合等
 正式报告包含Agent工具循环、数学方法、主要实验与运行演示；逐条误判、完整记录和接口细节在仓库中：
 
 - [实验补充说明](docs/实验补充说明.md)：数据清洗、参数表、55次交叉验证拟合、学习曲线、阈值分析、全部16条误判和8张实验图。
+- [真实Agent实验](docs/真实Agent实验.md)：20条任务、local对照、费用、阈值解释错误与前后修复。
+- [技能复用](docs/SKILL_REUSE.md)：K-Dense外部技能1.5的来源、适配及7项离线核验。
 - [Agent设计](docs/LLM_AGENT.md)：模型选工具、结果回传、证据检查、人工确认及当前验证范围。
 - [接口与配置](docs/接口说明.md)：配置字段、HTTP请求、返回状态及导出方法。
 - [组件与许可证](docs/THIRD_PARTY.md)：依赖版本、来源、许可和适配说明。
@@ -107,8 +117,12 @@ python src/extended_experiments.py  # 55次CV拟合、15次学习曲线拟合等
 
 ## 限制与来源
 
-只验证英文历史spam分类。没有近期中文诈骗数据、真人用户实验或线上LLM效果数据。静态标志不能验证网站安全；人工确认也不自动使建议正确。LLM摘要可能出错；规则和工具白名单限制操作权限，但不保证完全消除提示注入影响。复核状态仅驻留内存，最多100条，服务重启后清除；可导出本次报告，不自动训练或永久保存私人短信。
+只验证英文历史spam分类。没有近期中文诈骗数据或真人用户实验；线上LLM为旧公开语料抽样、构造任务和短期重复，无独立近期语料或真人研究。静态标志不能验证网站安全；人工确认也不自动使建议正确。LLM摘要可能出错；规则和工具白名单限制操作权限，但不保证完全消除提示注入影响。复核状态仅驻留内存，最多100条，服务重启后清除；可导出本次报告，不自动训练或永久保存私人短信。
 
 数据：Almeida & Hidalgo (2011), SMS Spam Collection, UCI, DOI https://doi.org/10.24432/C5CC84 ，CC BY4.0。API协议参照[OpenAI官方函数调用文档](https://developers.openai.com/api/docs/guides/function-calling)，采用Python标准库自行适配，没有复制SDK或引入第三方Agent框架。详见`docs/LLM_AGENT.md`。
 
 公开仓库：https://github.com/Ali-Xiyao/sms-triage-agent-course-project 。仓库只发布代码、公开数据与演示材料，正式身份报告仅在本地提交包中提供。
+
+## 生成式AI辅助
+
+Codex参与方案细化、代码与调试、实验脚本、图表和报告起草修改；DeepSeek Flash是运行与评估组件。通过可复算实验、52项测试、哈希及实际API记录核验；保留错误和限制，生成内容仍需提交者最终核对与解释。外部技能及第三方算法、数据分别归属其原作者。
