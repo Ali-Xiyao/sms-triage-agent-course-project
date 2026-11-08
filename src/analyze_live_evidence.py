@@ -110,7 +110,7 @@ def main():
     fields=['batch','case','source','group','true_label','expected_action','local_action','llm_action',
             'status','required_evidence_complete','api_requests','seconds']
     with (out/'all_batch_tasks.csv').open('w',newline='') as stream:
-        writer=csv.DictWriter(stream,fieldnames=fields);writer.writeheader()
+        writer=csv.DictWriter(stream,fieldnames=fields,lineterminator='\n');writer.writeheader()
         for batch,data in zip(['repair_before','repair_after','holdout','stability'],all_batches):
             for row in data['cases']:
                 writer.writerow({'batch':batch,'case':row['case'],'source':row.get('source','constructed_repair'),
