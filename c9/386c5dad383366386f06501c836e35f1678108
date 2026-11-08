@@ -1,0 +1,25 @@
+src/analyze_live_evidence.py
+  s_3a54662688f7da::t_a0895d54e40a45 113
+results/llm/all_batch_tasks.csv
+  s_3a54662688f7da::t_8d649c9aaae3fa 1-171
+results/llm/holdout_evaluation.json
+  s_3a54662688f7da::t_75ace86edc9688 28976
+results/llm/stability_evaluation.json
+  s_3a54662688f7da::t_0c9bd8207508fe 9026
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c9386c5dad383366386f06501c836e35f1678108",
+  "prompts": {},
+  "sessions": {
+    "s_3a54662688f7da": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1aea5-6853-7eb2-ba97-f433bb39fd04",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Ali-Xiyao <aliwang0126@gmail.com>"
+    }
+  }
+}
